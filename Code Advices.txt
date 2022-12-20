@@ -1,0 +1,1 @@
+LlistaProductes-> Podeis hacer solo un afegir producte, ya que como producto acepta serveis i bens. Clase padre = Producto, classes hijas = Servei, Be
