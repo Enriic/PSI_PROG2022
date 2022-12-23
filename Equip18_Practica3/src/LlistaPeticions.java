@@ -27,7 +27,7 @@ public class LlistaPeticions {
 
 		Scanner LlegirPet =new Scanner(System.in);
 
-		Peticion =LlegirPet.nextLine();
+		Peticio =LlegirPet.nextLine();
 
 
 		System.out.println("Vols acceptar o refusar?");
