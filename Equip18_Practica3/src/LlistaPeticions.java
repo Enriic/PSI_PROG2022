@@ -7,7 +7,7 @@ public class LlistaPeticions {
 	
 	
 	public LlistaPeticions(int dim) {
-		llista = new Peticio[];
+		llista = new Peticio[dim];
 		numElem = 0;
 	}
 	
