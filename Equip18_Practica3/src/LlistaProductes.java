@@ -1,7 +1,7 @@
-import java.io.*;
+
 import java.util.*;
 
-@SuppressWarnings("unused")
+
 public class LlistaProductes {
 	
 	Producte [] llista;
@@ -87,7 +87,6 @@ public class LlistaProductes {
 		}
 		return aux;
 	}
-	
 	
 	@Override
 	public String toString() {

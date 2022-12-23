@@ -30,7 +30,6 @@ public class Peticio {
 		
 	}
 	
-
 	public int getEstat() {
 		return Estat;
 	}
@@ -39,13 +38,6 @@ public class Peticio {
 		Estat = estat;
 	}
 	
-	public void setValoracioDemanat(int val) {
-		valoracioDemanat = val;
-	}
-	
-	public void setValoracioOfert(int val) {
-		valoracioOfert = val;
-	}
 
 	public String getCodi() {
 		return codi;
@@ -66,9 +58,8 @@ public class Peticio {
 	public String getCodiProducteOfert() {
 		return codiProducteOfert;
 	}
-}
 
-    /*public void setValoracioDemanat(int val) {
+    public void setValoracioDemanat(int val) {
         usuariDemana.setValoracio(((usuariDemana.getValoracio()*usuariDemana.getIntercanvis())+val)/(usuariDemana.getIntercanvis()+1));
         usuariDemana.afegirIntercanvi();
     }
@@ -78,7 +69,5 @@ public class Peticio {
         usuariRep.afegirIntercanvi();
     }
 
-    public String getCodi() {
-        return codi;
-    }*/
+}
 
