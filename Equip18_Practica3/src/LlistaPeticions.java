@@ -17,37 +17,6 @@ public class LlistaPeticions {
 		}
 	}
 	
-	public void acceptaorefusa(int estat){
-
-		System.out.println("Quina peticio vols acceptar o refusar?");
-
-		Scanner LlegirPet =new Scanner(System.in);
-
-		Peticion =LlegirPet.nextLine();
-
-
-		System.out.println("Vols acceptar o refusar?");
-
-		Scanner estatLlegir = new Scanner(System.in);
-		estat = estatLlegir.nextInt();
-		
-		if(estat==1){
-
-			getUsuariDemana().setValoracioOfert(valoracioDemanat);
-
-			getUsuariRep().setValoracioDemanat(valoracioOfert);
-
-
-		}
-
-		if(estat == 0){
-
-			System.out.println("Pendent");
-
-		}
-
-	}
-	
 	public void esborrarPet(String codi) {
 		// encontrar pet., borrar y reordenar lista
 	}
@@ -64,5 +33,5 @@ public class LlistaPeticions {
 		// ...si Estat==2...
 	}
 	
-
+	
 }

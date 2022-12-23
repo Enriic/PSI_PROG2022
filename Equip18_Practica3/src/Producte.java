@@ -1,6 +1,6 @@
 
 
-public class Producte {
+public abstract class Producte {
 	private String ID;
 	private String descripcio;
 	private String tipus;
@@ -12,7 +12,6 @@ public class Producte {
 		this.tipus = tipus;
 		this.descripcio = descripcio;
 		dataInicial = new Data();
-		
 	}
 	
 	public Producte (String ID, String tipus, String descripcio, Data dataInicial) { //construcotr per quan carreguem el producte del fitxer i la data inicial no es la del moment
@@ -38,15 +37,19 @@ public class Producte {
 		return dataInicial;
 	}
 	
-	public Producte copia() {
-		Producte aux = new Producte(ID, tipus, descripcio);
-		return aux;
-	}
+	public abstract Producte copia();
 	
 	public void canviarDataInicial(Data D) {
 		dataInicial = D;
 	}
-
+	
+	public abstract void setActiu(boolean actiu);
+	
+	public abstract boolean esActiu();
+	
+	public abstract void escriureFitxer();
+	
+	
 	@Override
 	public String toString() {
 		return "[ID = " + ID + " | tipus = " + tipus + " | descripcio = " + descripcio + " | data de publicacio = " + dataInicial.toString() + "]\n";

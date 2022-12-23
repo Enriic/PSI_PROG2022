@@ -1,7 +1,0 @@
-S;S001;Servei;Classes de programacio;01/09/2021;31/12/2024;3;
-B;B001;Be;Bicicleta;23/10/2021;0.5;1.2;1.8;20;23/12/2021;
-S;S002;Servei;Neteja de domicili;15/12/2021;01/03/2025;1;
-B;B002;Be;Play 5;25/03/2022;0.1;0.5;0.4;10;0/0/0;
-B;B003;Be;moble;07/08/2022;2.0;2.5;0.9;60;0/0/0;
-S;S003;Servei;Servei de jardineria;15/10/2021;31/01/2022;18;
-S;S004;Servei;Mecanic;16/12/2022;31/1/2023;0;

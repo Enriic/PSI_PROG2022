@@ -19,7 +19,7 @@ public class Data {
 		}
 	}
 	
-	public Data() {										//controcutor data actual
+	public Data() {										//constrcutor data actual
 		Calendar c = Calendar.getInstance();
 		dia = c.get(Calendar.DATE);
 		mes = c.get(Calendar.MONTH) + 1;
@@ -104,6 +104,45 @@ public class Data {
 			return true;
 		}
 		return false;
+	}
+	
+	//-1 ---> no comparable perque una de les dos es NULL
+	//0 ----> No ha passat
+	//1 ----> JA ha passat
+	//2 ---->IGUAL
+	public int esMesGran(Data D) {
+		int r = -1;
+		if (this.esNull() || D.esNull()) {
+			return -1;
+		}
+		
+		if (this.any == D.any) {
+			if (this.mes == D.mes) {
+				if (this.dia == D.dia) {
+					r = 2;
+				}
+				else if (this.dia < D.dia) {
+					r = 1;
+				}
+				else if (this.dia > D.dia){
+					r = 0;
+				}
+			}
+			else if (this.mes < D.mes) {
+				r = 1;
+				
+			}
+			else if (this.mes > D.mes){
+				r = 0;
+			}
+		}
+		else if (this.any < D.any) {
+			r = 1;
+		}
+		else if (this.mes > D.mes){
+			r = 0;
+		}
+		return r;
 	}
 	
 	public Data copia() {

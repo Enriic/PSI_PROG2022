@@ -1,4 +1,3 @@
-
 public class Peticio {
 	private String codi;
 	private Usuari usuariDemana;
@@ -19,6 +18,17 @@ public class Peticio {
 		
 	}
 
+	public Peticio(String codi, Usuari usuariDemana, Usuari usuariRep, String codiProducteDemanat, String codiProducteOfert, int val1, int val2) {
+		this.codi = codi;
+		this.usuariDemana = usuariDemana;
+		this.usuariRep = usuariRep;
+		this.codiProducteDemanat = codiProducteDemanat;
+		this.codiProducteOfert = codiProducteOfert;
+		this.valoracioDemanat=val1;
+		this.valoracioOfert=val2;
+		this.Estat = 0;
+		
+	}
 	
 
 	public int getEstat() {
@@ -57,3 +67,18 @@ public class Peticio {
 		return codiProducteOfert;
 	}
 }
+
+    /*public void setValoracioDemanat(int val) {
+        usuariDemana.setValoracio(((usuariDemana.getValoracio()*usuariDemana.getIntercanvis())+val)/(usuariDemana.getIntercanvis()+1));
+        usuariDemana.afegirIntercanvi();
+    }
+
+    public void setValoracioOfert(int val) {
+        usuariRep.setValoracio(((usuariRep.getValoracio()*usuariRep.getIntercanvis())+val)/(usuariRep.getIntercanvis()+1));
+        usuariRep.afegirIntercanvi();
+    }
+
+    public String getCodi() {
+        return codi;
+    }*/
+

@@ -4,25 +4,26 @@ public class MAIN {
 
 	public static void main(String[] args) throws IOException {
 		
-		LlistaProductes LlistaP = new LlistaProductes(10); 	//creem la llista
-		ActualitzarLlistaFitxer("old.txt", LlistaP);		//carreguem els productes del fitxer a la llista (fitxer de la opcio no guardar)
-		copiarFitxer("old.txt", "new.txt");					//copiem el contingut del fitxer que no modificarem al que si que modificarem
-		
+		LlistaProductes LlistaP = new LlistaProductes(1); 	//creem la llista
+		CarregarLlistaFitxer("old.txt", LlistaP);			
 		@SuppressWarnings("resource")
 		Scanner sn = new Scanner(System.in);
         boolean sortir = false;
         int opcio;
-        
         
         while (!sortir) {
  
             System.out.println("\n\n1. Afegir be");
             System.out.println("2. Afegir servei");
             System.out.println("3. Llistar tots els productes");
-            System.out.println("4. Guardar i sortir");
-            System.out.println("5. Sortir sense guardar");
+            System.out.println("4. Llistar serveis actius");
+            System.out.println("5. Llistar bens actius");
+            System.out.println("6. Donar de baixa Be");
+            System.out.println("7. Donar de baixa Servei");
+            System.out.println("8. Servei amb mes intercanvis");
+            System.out.println("9. Guardar i sortir");
+            System.out.println("10. Sortir sense guardar");
             
- 
             try {
  
                 System.out.println("Tria una opcio");
@@ -48,9 +49,7 @@ public class MAIN {
                     	int pes = teclat.nextInt();
                     	
                     	Be B = new Be(id, "Be", descripcio, amplada, altura, fons, pes);
-                    	LlistaP.afegirBe(B);  	//afegim el be al fitxer
-                    	B.escriureBeFitxer();	//i a la llista
-                    	
+                    	LlistaP.afegirProducte(B);
                         break;
                     case 2:
                     	
@@ -68,24 +67,44 @@ public class MAIN {
                     	int any = teclat.nextInt();
                     	
                     	Servei S = new Servei(idServei, "Servei", descripcioServei, new Data(dia,mes,any));
-                    	LlistaP.afegirServei(S);
-                    	S.escriureServeiFitxer();
+                    	LlistaP.afegirProducte(S);
                     	
                         break;
                     case 3:
                     	System.out.println("\n\n");
                 		System.out.print(LlistaP.toString());
                         break;
+                        
                     case 4:
-                        sortir = true;
-                        copiarFitxer("new.txt", "old.txt");   //si guardem, copiem el fitxer que hem estat utilitzant tambe al vell que no hem editat
-                        break;
+                    	LlistaProductes LS = LlistaP.llistaServeisActius();
+                		System.out.println(LS.toString());
+                    	break;
                     case 5:
+                    	LlistaProductes LB = LlistaP.llistaBensActius();
+                		System.out.println(LB.toString());
+                    	break;
+                    case 6:
+                    	System.out.println("Escriu l'ID del be que vols donar de baixa:");
+                    	String idB = teclat.next();
+                    	LlistaP.donarDeBaixa(idB);
+                    	break;
+                    case 7:
+                    	System.out.println("Escriu l'ID del servei que vols donar de baixa:");
+                    	String idS = teclat.next();
+                    	LlistaP.donarDeBaixa(idS);
+                    	break;
+                    case 8:
+                    	System.out.println("Servei amb mes intercanvis:");
+                    	break;
+                    case 9:
+                        sortir = true;
+                        SobreescriureFitxer("old.txt",LlistaP);
+                        break;
+                    case 10:
                     	sortir = true;
-                    	copiarFitxer("old.txt", "new.txt");		//si no guardem, tornem a sobreescriure el fitxer en el qual hem estat treballant pel del principi sense editar
                     	break;
                     default:
-                        System.out.println("Nomes numeros entre 1 i 5");
+                        System.out.println("Nomes numeros entre 1 i 10");
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Has d'insertar un numero");
@@ -96,7 +115,7 @@ public class MAIN {
 	
 	
 	
-	public static void ActualitzarLlistaFitxer(String nomFitxer, LlistaProductes LlistaP ) throws IOException{
+	public static void CarregarLlistaFitxer(String nomFitxer, LlistaProductes LlistaP ) throws IOException{
 		String type;
 		String ID;
 		String descripcio;
@@ -108,6 +127,8 @@ public class MAIN {
 		String frase;
 		int dia, mes, any;
 		int numIntercanvis;
+		int numActiu;
+		boolean actiu;
 		
 		Scanner F = new Scanner (new File(nomFitxer));
 		Scanner particio;
@@ -146,8 +167,15 @@ public class MAIN {
 				}else {
 					dataIntercanvi = new Data (dia, mes, any);
 				}
-				Be B = new Be(ID, type, descripcio, dataInicial, amplada, alçada, fons, pes, dataIntercanvi);
-				LlistaP.afegirBe(B);    
+				numActiu = particio.nextInt();
+				if (numActiu == 1)
+					actiu = true;
+				else
+					actiu = false;
+				
+				Be B = new Be(ID, type, descripcio, dataInicial, amplada, alçada, fons, pes, dataIntercanvi, actiu);
+				B.esActiu(); //abans d'afegir comprovem si es veritat que encara esta actiu (pot ser que lutim cop de guardar ho estigues i ara ja no)
+				LlistaP.afegirProducte(B);    
 			}									
 			
 			else if (type.equalsIgnoreCase("S")) {
@@ -168,8 +196,14 @@ public class MAIN {
 				Data dataCaducitat = new Data (dia, mes, any);
 				
 				numIntercanvis = particio.nextInt();
-				Servei S = new Servei(ID, type, descripcio, dataInicial, dataCaducitat, numIntercanvis);		
-				LlistaP.afegirServei(S);
+				numActiu = particio.nextInt();
+				if (numActiu == 1)
+					actiu = true;
+				else
+					actiu = false;
+				Servei S = new Servei(ID, type, descripcio, dataInicial, dataCaducitat, numIntercanvis, actiu);
+				S.esActiu();
+				LlistaP.afegirProducte(S);
 			}
 		}
 		
@@ -177,25 +211,13 @@ public class MAIN {
 		
 	}
 	
-	public static void copiarFitxer(String fitxerOrigen, String fitxerDesti) {
-		File origen = new File(fitxerOrigen);
-	    File desti = new File(fitxerDesti);
-	
-	    try {
-	        InputStream in = new FileInputStream(origen);
-	        OutputStream out = new FileOutputStream(desti);
-	        byte[] buf = new byte[1024];
-	        int len;
-	        while ((len = in.read(buf)) > 0) {
-	             out.write(buf, 0, len);
-	        }
-	        in.close();
-	        out.close();
-	        
-	     } catch (IOException ioe) {
-	         ioe.printStackTrace();
-	     }
-	 }
+	public static void SobreescriureFitxer(String fitxer, LlistaProductes L) throws IOException {
+		
+		BufferedWriter bw = new BufferedWriter(new FileWriter(fitxer));
+		bw.write("");
+		bw.close();
+		L.escriureLlistaAlFitxer();
+	}
 }
 
 
