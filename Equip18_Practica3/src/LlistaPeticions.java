@@ -2,16 +2,16 @@ import java.util.Scanner;
 
 public class LlistaPeticions {
 
-	private Peticion[] llista;
+	private Peticio[] llista;
 	private int numElem;
 	
 	
 	public LlistaPeticions(int dim) {
-		llista = new Peticion[];
+		llista = new Peticio[];
 		numElem = 0;
 	}
 	
-	public void afegirPet(Peticion pet) {
+	public void afegirPet(Peticio pet) {
 		if (numElem < llista.length) {
 			llista[numElem] = pet;
 			numElem++;
