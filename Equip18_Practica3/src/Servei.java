@@ -75,6 +75,10 @@ public class Servei extends Producte{
 		return actiu;
 	}
 	
+	public void desactivarServei() {
+		this.actiu=false;
+	}
+	
 	@Override
 	public String toString() {
 		return "[ID = " + this.getID() + " | tipus = " + this.getTipus() + " | descripcio = " + this.getDescripcio() + " | data de publicacio = " + this.getDataInicial().toString() + " | dataCaducitat = "

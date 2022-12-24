@@ -19,7 +19,8 @@ public class LlistaPeticions {
 	}
 
 
-
+// wtf, esto se cambia..	|||
+//							VVV
 
 	public void acceptaorefusa(int estat){
 
@@ -52,6 +53,7 @@ public class LlistaPeticions {
 
 	}
 	
+	//No esta pedido en la practica, esta bien como bonus
 	public void esborrarPet(String codi) {
 		// encontrar pet., borrar y reordenar lista
 	}
