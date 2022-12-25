@@ -1,2 +1,2 @@
-LlistaProductes-> Podeis hacer solo un afegir producte, ya que como producto acepta serveis i bens. Clase padre = Producto, classes hijas = Servei, Be
+
 LlistaPeticio-> NO SYSTEM.OUT.PRINTLN en las clases lista. Se hacen en los metodos private static del main.
