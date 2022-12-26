@@ -59,13 +59,13 @@ public class Peticio {
 		return codiProducteOfert;
 	}
 
-    public void setValoracioDemanat(int val) {
-        usuariDemana.setValoracio(((usuariDemana.getValoracio()*usuariDemana.getIntercanvis())+val)/(usuariDemana.getIntercanvis()+1));
+    public void setValoracioDemanat(int val1) {
+        usuariDemana.setValoracio(((usuariDemana.getValoracio()*usuariDemana.getIntercanvis())+val1)/(usuariDemana.getIntercanvis()+1));
         usuariDemana.afegirIntercanvi();
     }
 
-    public void setValoracioOfert(int val) {
-        usuariRep.setValoracio(((usuariRep.getValoracio()*usuariRep.getIntercanvis())+val)/(usuariRep.getIntercanvis()+1));
+    public void setValoracioOfert(int val2) {
+        usuariRep.setValoracio(((usuariRep.getValoracio()*usuariRep.getIntercanvis())+val2)/(usuariRep.getIntercanvis()+1));
         usuariRep.afegirIntercanvi();
     }
 

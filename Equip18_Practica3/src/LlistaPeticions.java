@@ -1,9 +1,12 @@
-import java.util.Scanner;
+
 
 public class LlistaPeticions {
 
 	private Peticio[] llista;
 	private int numElem;
+	private int val2;
+	private int val1;
+	
 	
 	
 	public LlistaPeticions(int dim) {
@@ -19,35 +22,45 @@ public class LlistaPeticions {
 	}
 
 
-// wtf, esto se cambia..	|||
-//							VVV
-
-	public void acceptaorefusa(int estat){
-
-		System.out.println("Quina peticio vols acceptar o refusar?");
-
-		Scanner LlegirPet =new Scanner(System.in);
-
-		Peticio =LlegirPet.nextLine();
 
 
-		System.out.println("Vols acceptar o refusar?");
 
-		Scanner estatLlegir = new Scanner(System.in);
-		estat = estatLlegir.nextInt();
+	public void acepta_peticio(int val1, int val2){
+
+		if(0<val1 && val1<5){
+
+			this.val1=val1;
+
+		}
+
+		if(0<val2 && val2<5){
+
+			this.val2 = val2;
+
+		}
+		
+	}
+
+
+
+
+
+
+
+	public void AcceptaORefusa(int estat){
+
+		
 		
 		if(estat==1){
 
-			getUsuariDemana().setValoracioOfert(valoracioDemanat);
-
-			getUsuariRep().setValoracioDemanat(valoracioOfert);
+			acepta_peticio(val1, val2);
 
 
 		}
 
-		if(estat == 0){
+		if(estat == 2){				//rachaza petición
 
-			System.out.println("Pendent");
+			
 
 		}
 
@@ -69,6 +82,4 @@ public class LlistaPeticions {
 	public void mostrarPetRefusades() {
 		// ...si Estat==2...
 	}
-	
-
 }
