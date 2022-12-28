@@ -1,5 +1,5 @@
 public class Peticio {
-	private String codi;
+	private int codi;
 	private Usuari usuariA; 		// Usuario que HACE la petición
 	private Usuari usuariB; 		// Usuario que RECIBE la petición
 	private String codiProducteA;
@@ -8,7 +8,7 @@ public class Peticio {
 	private int valoracioB;
 	private int estat;
 	
-	public Peticio(String codi, Usuari usuariA, Usuari usuariB, String codiProducteA, String codiProducteB) {
+	public Peticio(int codi, Usuari usuariA, Usuari usuariB, String codiProducteA, String codiProducteB) {
 		this.codi = codi;
 		this.usuariA = usuariA;
 		this.usuariB = usuariB;
@@ -22,7 +22,7 @@ public class Peticio {
 		return estat;
 	}
 
-	public String getCodi() {
+	public int getCodi() {
 		return codi;
 	}
 
@@ -42,18 +42,9 @@ public class Peticio {
 		return codiProducteB;
 	}
 
-	public void AcceptarPet(int valA, int valB) {
-		estat = 1;
-		usuariA.setValoracio(((usuariA.getValoracio()*usuariA.getIntercanvis())+valA)/(usuariA.getIntercanvis()+1));
-		usuariA.afegirIntercanvi();
-		usuariB.setValoracio(((usuariB.getValoracio()*usuariB.getIntercanvis())+valB)/(usuariB.getIntercanvis()+1));
-		usuariB.afegirIntercanvi();
-		
-	}
+
 	
-	public void RefusarPet() {
-		estat = 2;
-	}
+
 
 }
 
