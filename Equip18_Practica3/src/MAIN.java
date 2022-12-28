@@ -3,8 +3,22 @@ import java.io.*;
 public class MAIN {
 
 	public static void main(String[] args) throws IOException {
+
+		Usuari user1= new Usuari("Gerard", "marinperezgeri@gmail.com", "43850");			//Prueba user 1
+		Usuari user2= new Usuari("Argi", "argiderirurt@gmail.com", "31001");				//Prueba user 2
+		Usuari user3= new Usuari("Albert", "alberturv@gmail.com", "54850");				//Prueba user 3
+		Usuari user4= new Usuari("Ramzi", "ramziurv@gmail.com", "98775");					//Prueba user 4
+
+
+		Peticio pet1 = new Peticio(12345, user1, user2, "123A", "456B");		//Prueba peticion 1
+		Peticio pet2 = new Peticio(11111, user3, user4, "789A", "321B");		//Prueba peticion 2
 		
+
+
+
+
 		LlistaProductes LlistaP = new LlistaProductes(1); 	//creem la llista
+		LlistaPeticions Peti = new LlistaPeticions(1);					//creem la llista peticions
 		CarregarLlistaFitxer("old.txt", LlistaP);			
 		@SuppressWarnings("resource")
 		Scanner sn = new Scanner(System.in);
@@ -23,6 +37,7 @@ public class MAIN {
             System.out.println("8. Servei amb mes intercanvis");
             System.out.println("9. Guardar i sortir");
             System.out.println("10. Sortir sense guardar");
+			System.out.println("11. Afegir Peticio");
             
             try {
  
@@ -103,6 +118,30 @@ public class MAIN {
                     case 10:
                     	sortir = true;
                     	break;
+					case 11:
+						System.out.println("A quin usuari li vols fer la peticio?");
+						Usuari UsuariB =teclat.next();
+						System.out.println("Inserti el codi del producte que li interesa: ");
+						String codiProducteB =teclat.next();
+						System.out.println("Indica el teu nom d'usuari:");
+						Usuari UsuariA =teclat.next();
+						System.out.println("Inserti el codi del producte per fer l'intercanvi: ");
+						String codiProducteA =teclat.next();
+
+
+						
+
+						int codi;
+						while (codi != 99999) {
+							codi++;
+						}
+
+						Peticio pet = new Peticio(codi, UsuariA, UsuariB, codiProducteA, codiProducteB);
+						Peti.afegirPet(pet);
+						
+						
+
+
                     default:
                         System.out.println("Nomes numeros entre 1 i 10");
                 }
@@ -219,6 +258,3 @@ public class MAIN {
 		L.escriureLlistaAlFitxer();
 	}
 }
-
-
-
