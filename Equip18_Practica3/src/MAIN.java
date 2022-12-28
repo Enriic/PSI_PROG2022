@@ -120,11 +120,11 @@ public class MAIN {
                     	break;
 					case 11:
 						System.out.println("A quin usuari li vols fer la peticio?");
-						Usuari UsuariB =teclat.next();
+						Usuari UsuariB =teclat.next();	//Mirar error
 						System.out.println("Inserti el codi del producte que li interesa: ");
 						String codiProducteB =teclat.next();
 						System.out.println("Indica el teu nom d'usuari:");
-						Usuari UsuariA =teclat.next();
+						Usuari UsuariA =teclat.next();	//Mirar error
 						System.out.println("Inserti el codi del producte per fer l'intercanvi: ");
 						String codiProducteA =teclat.next();
 

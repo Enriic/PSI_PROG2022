@@ -21,24 +21,6 @@ public class LlistaPeticions {
 		}
 	}
 
-	public void AcceptarPet(int estat, int valA, int valB) {
-		estat = 1;
-
-		Usuari usuariA.setValoracio(((usuariA.getValoracio()*usuariA.getIntercanvis())+valA)/(usuariA.getIntercanvis()+1));
-		System.out.println(usuariA.getValoracio());
-		usuariA.afegirIntercanvi();
-		
-		Usuari usuariB.setValoracio(((usuariB.getValoracio()*usuariB.getIntercanvis())+valB)/(usuariB.getIntercanvis()+1));
-		System.out.println(usuariB.getValoracio());
-		usuariB.afegirIntercanvi();	
-	}
-	
-	
-
-	public void RefusarPet(int estat) {
-		estat = 2;
-	}
-
 
 /* 
 	public void acepta_peticio(int val1, int val2){
