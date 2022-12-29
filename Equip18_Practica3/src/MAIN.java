@@ -35,9 +35,10 @@ public class MAIN {
             System.out.println("6. Donar de baixa Be");
             System.out.println("7. Donar de baixa Servei");
             System.out.println("8. Servei amb mes intercanvis");
-            System.out.println("9. Guardar i sortir");
-            System.out.println("10. Sortir sense guardar");
-			System.out.println("11. Afegir Peticio");
+			System.out.println("9. Afegir Peticio");
+            System.out.println("10. Guardar i sortir");
+            System.out.println("11. Sortir sense guardar");
+			
             
             try {
  
@@ -111,14 +112,8 @@ public class MAIN {
                     case 8:
                     	System.out.println("Servei amb mes intercanvis:");
                     	break;
-                    case 9:
-                        sortir = true;
-                        SobreescriureFitxer("old.txt",LlistaP);
-                        break;
-                    case 10:
-                    	sortir = true;
-                    	break;
-					case 11:
+
+					case 9:
 						System.out.println("A quin usuari li vols fer la peticio?");
 						Usuari UsuariB = teclat.next();	//Mirar error
 						System.out.println("Inserti el codi del producte que li interesa: ");
@@ -139,6 +134,16 @@ public class MAIN {
 						Peti.afegirPet(pet);
 
 						break;
+
+                    case 10:
+                        sortir = true;
+                        SobreescriureFitxer("old.txt",LlistaP);
+                        break;
+                    case 11:
+                    	sortir = true;
+                    	break;
+
+
 						
 						
 
