@@ -4,8 +4,6 @@ public class Peticio {
 	private Usuari usuariB; 		// Usuario que RECIBE la petición
 	private String codiProducteA;
 	private String codiProducteB;
-	private int valoracioA;
-	private int valoracioB;
 	private int estat;
 	
 	public Peticio(int codi, Usuari usuariA, Usuari usuariB, String codiProducteA, String codiProducteB) {
@@ -46,23 +44,29 @@ public class Peticio {
 	
 	public void AcceptarPet(int valA, int valB) {
 		estat = 1;
-
-		usuariA.setValoracio(((usuariA.getValoracio()*usuariA.getIntercanvis())+valA)/(usuariA.getIntercanvis()+1));
-		System.out.println(usuariA.getValoracio());
-		usuariA.afegirIntercanvi();
 		
-		usuariB.setValoracio(((usuariB.getValoracio()*usuariB.getIntercanvis())+valB)/(usuariB.getIntercanvis()+1));
-		System.out.println(usuariB.getValoracio());
-		usuariB.afegirIntercanvi();	
+		if(0<valA && valA<5){
+		
+			usuariA.setValoracio(((usuariA.getValoracio()*usuariA.getIntercanvis())+valA)/(usuariA.getIntercanvis()+1));
+			System.out.println(usuariA.getValoracio());
+			usuariA.afegirIntercanvi();
+		}
+		
+
+		if(0<valB && valB<5){
+
+			usuariB.setValoracio(((usuariB.getValoracio()*usuariB.getIntercanvis())+valB)/(usuariB.getIntercanvis()+1));
+			System.out.println(usuariB.getValoracio());
+			usuariB.afegirIntercanvi();
+		}	
 	}
 	
 	
 
 	public void RefusarPet(int estat) {
 		estat = 2;
+
+		//PREGUNTAR EN LA REUNION.
+
 	}
-
-
-
 }
-

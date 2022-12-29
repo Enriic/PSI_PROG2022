@@ -50,6 +50,7 @@ public class MAIN {
                 
                 switch (opcio) {
                     case 1:
+
                     	System.out.println("Escriu els seguents valors:");
                     	System.out.println("ID:");
                     	String id = teclat.next();
@@ -67,6 +68,7 @@ public class MAIN {
                     	Be B = new Be(id, "Be", descripcio, amplada, altura, fons, pes);
                     	LlistaP.afegirProducte(B);
                         break;
+
                     case 2:
                     	
                     	System.out.println("Escriu els seguents valors:");
@@ -86,7 +88,9 @@ public class MAIN {
                     	LlistaP.afegirProducte(S);
                     	
                         break;
+
                     case 3:
+
                     	System.out.println("\n\n");
                 		System.out.print(LlistaP.toString());
                         break;
@@ -123,7 +127,7 @@ public class MAIN {
 						System.out.println("Inserti el codi del producte per fer l'intercanvi: ");
 						String codiProducteA =teclat.next();
 
-						int codi;
+						int codi=0;
 
 
 						if (codi <= 99999) {
