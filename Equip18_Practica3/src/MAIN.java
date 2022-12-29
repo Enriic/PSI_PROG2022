@@ -120,7 +120,7 @@ public class MAIN {
                     	break;
 					case 11:
 						System.out.println("A quin usuari li vols fer la peticio?");
-						Usuari UsuariB =teclat.next();	//Mirar error
+						Usuari UsuariB = teclat.next();	//Mirar error
 						System.out.println("Inserti el codi del producte que li interesa: ");
 						String codiProducteB =teclat.next();
 						System.out.println("Indica el teu nom d'usuari:");
@@ -128,16 +128,17 @@ public class MAIN {
 						System.out.println("Inserti el codi del producte per fer l'intercanvi: ");
 						String codiProducteA =teclat.next();
 
-
-						
-
 						int codi;
-						while (codi != 99999) {
+
+
+						if (codi <= 99999) {
 							codi++;
 						}
 
 						Peticio pet = new Peticio(codi, UsuariA, UsuariB, codiProducteA, codiProducteB);
 						Peti.afegirPet(pet);
+
+						break;
 						
 						
 
