@@ -64,7 +64,7 @@ public class LlistaPeticions {
 				System.out.print(llista[i]);
 
 			}
-		}						
+		}
 	}
 	
 	public void mostrarPetAcceptades(int estat) {							//FASE DE PRUEBA DE MOSTRAR PETICIONS PENDENTS
