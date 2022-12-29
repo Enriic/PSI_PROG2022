@@ -4,8 +4,7 @@ public class LlistaPeticions {
 
 	private Peticio[] llista;
 	private int numElem;
-	private int val2;
-	private int val1;
+
 	
 	
 	
@@ -20,7 +19,6 @@ public class LlistaPeticions {
 			numElem++;
 		}
 	}
-
 
 /* 
 	public void acepta_peticio(int val1, int val2){
@@ -52,10 +50,7 @@ public class LlistaPeticions {
 		}
 
 	}
-
-*/
-	
-/* 
+	 
 	//No esta pedido en la practica, esta bien como bonus
 	public void esborrarPet(String codi) {
 		// encontrar pet., borrar y reordenar lista
@@ -66,7 +61,7 @@ public class LlistaPeticions {
 		for(int i = 0; i<numElem; i++){
 			if(estat == 0){
 			
-				System.out.println(llista[i]);
+				System.out.print(llista[i]);
 
 			}
 		}						
@@ -76,7 +71,7 @@ public class LlistaPeticions {
 		for(int i = 0; i<numElem; i++){
 			if(estat == 1){
 			
-				System.out.println(llista[i]);
+				System.out.print(llista[i]);
 
 			}
 		}
@@ -86,7 +81,7 @@ public class LlistaPeticions {
 		for(int i = 0; i<numElem; i++){
 			if(estat == 2){
 			
-				System.out.println(llista[i]);
+				System.out.print(llista[i]);
 
 			}
 		}
