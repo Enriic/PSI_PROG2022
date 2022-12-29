@@ -69,4 +69,10 @@ public class Peticio {
 		//PREGUNTAR EN LA REUNION.
 
 	}
+
+
+
+	public String toString(){
+		return "Codi: " +getCodi()+ " Usuari que demana: "+getUsuariA()+ " Usuari al que se li fa la oferta: "+getUsuariB()+ "Codi del producte A: "+getCodiProducteA()+ "Codi del producte B: " +getCodiProducteB();
+	}
 }
