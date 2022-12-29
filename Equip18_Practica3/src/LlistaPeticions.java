@@ -62,7 +62,7 @@ public class LlistaPeticions {
 			if(estat == 0){
 			
 				System.out.print(llista[i]);
-
+	
 			}
 		}
 	}
