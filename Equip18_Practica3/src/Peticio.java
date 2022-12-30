@@ -45,28 +45,23 @@ public class Peticio {
 	public void AcceptarPet(int valA, int valB) {
 		estat = 1;
 		
-		if(0<valA && valA<5){
+		if((0<valA && valA<5) && (0<valB && valB<5)){
 		
 			usuariA.setValoracio(((usuariA.getValoracio()*usuariA.getIntercanvis())+valA)/(usuariA.getIntercanvis()+1));
 			System.out.println(usuariA.getValoracio());
-			usuariA.afegirIntercanvi();
-		}
-		
-
-		if(0<valB && valB<5){
+			usuariA.afegirIntercanvi();	
 
 			usuariB.setValoracio(((usuariB.getValoracio()*usuariB.getIntercanvis())+valB)/(usuariB.getIntercanvis()+1));
 			System.out.println(usuariB.getValoracio());
 			usuariB.afegirIntercanvi();
-		}	
+		}
+		else System.out.println("Valoracion(es) fuera de limite (0-5).");
 	}
 	
 	
 
 	public void RefusarPet(int estat) {
 		estat = 2;
-
-		//PREGUNTAR EN LA REUNION.
 
 	}
 

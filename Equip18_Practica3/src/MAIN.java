@@ -17,9 +17,9 @@ public class MAIN {
 
 
 
-		LlistaProductes LlistaP = new LlistaProductes(1); 	//creem la llista productes
-		LlistaPeticions Peti = new LlistaPeticions(1);					//creem la llista peticions
-		CarregarLlistaFitxer("old.txt", LlistaP);			
+		LlistaProductes LlistaProd = new LlistaProductes(1); 	//creem la llista productes
+		LlistaPeticions LlistaPet = new LlistaPeticions(1);					//creem la llista peticions
+		CarregarLlistaFitxer("old.txt", LlistaProd);			
 		@SuppressWarnings("resource")
 		Scanner sn = new Scanner(System.in);
         boolean sortir = false;
@@ -36,11 +36,12 @@ public class MAIN {
             System.out.println("7. Donar de baixa Servei");
             System.out.println("8. Servei amb mes intercanvis");
 			System.out.println("9. Afegir Peticio");
-			System.out.println("10. Mostrar peticions pendents");
-			System.out.println("11. Mostrar peticions acceptades");
-			System.out.println("12. Mostrar peticions refusades");
-            System.out.println("13. Guardar i sortir");
-            System.out.println("14. Sortir sense guardar");
+			System.out.println("10. Gestionar peticio");
+			System.out.println("11. Mostrar peticions pendents");
+			System.out.println("12. Mostrar peticions acceptades");
+			System.out.println("13. Mostrar peticions refusades");
+            System.out.println("14. Guardar i sortir");
+            System.out.println("15. Sortir sense guardar");
 			
             
             try {
@@ -70,7 +71,7 @@ public class MAIN {
                     	int pes = teclat.nextInt();
                     	
                     	Be B = new Be(id, "Be", descripcio, amplada, altura, fons, pes);
-                    	LlistaP.afegirProducte(B);
+                    	LlistaProd.afegirProducte(B);
                         break;
 
                     case 2:
@@ -89,61 +90,97 @@ public class MAIN {
                     	int any = teclat.nextInt();
                     	
                     	Servei S = new Servei(idServei, "Servei", descripcioServei, new Data(dia,mes,any));
-                    	LlistaP.afegirProducte(S);
+                    	LlistaProd.afegirProducte(S);
                     	
                         break;
 
                     case 3:
 
                     	System.out.println("\n\n");
-                		System.out.print(LlistaP.toString());
+                		System.out.print(LlistaProd.toString());
                         break;
                         
                     case 4:
-                    	LlistaProductes LS = LlistaP.llistaServeisActius();
+                    	LlistaProductes LS = LlistaProd.llistaServeisActius();
                 		System.out.println(LS.toString());
                     	break;
                     case 5:
-                    	LlistaProductes LB = LlistaP.llistaBensActius();
+                    	LlistaProductes LB = LlistaProd.llistaBensActius();
                 		System.out.println(LB.toString());
                     	break;
                     case 6:
                     	System.out.println("Escriu l'ID del be que vols donar de baixa:");
                     	String idB = teclat.next();
-                    	LlistaP.donarDeBaixa(idB);
+                    	LlistaProd.donarDeBaixa(idB);
                     	break;
                     case 7:
                     	System.out.println("Escriu l'ID del servei que vols donar de baixa:");
                     	String idS = teclat.next();
-                    	LlistaP.donarDeBaixa(idS);
+                    	LlistaProd.donarDeBaixa(idS);
                     	break;
                     case 8:
                     	System.out.println("Servei amb mes intercanvis:");
                     	break;
 
 					case 9:
-						System.out.println("A quin usuari li vols fer la peticio?");
-						Usuari UsuariB = teclat.next();	//Mirar error
-						System.out.println("Inserti el codi del producte que li interesa: ");
-						String codiProducteB =teclat.next();
-						System.out.println("Indica el teu nom d'usuari:");
-						Usuari UsuariA =teclat.next();	//Mirar error
-						System.out.println("Inserti el codi del producte per fer l'intercanvi: ");
-						String codiProducteA =teclat.next();
-
-						int codi=0;
-
-
-						if (codi <= 99999) {
-							codi++;
+						System.out.println("Introduzca el correo del usuario creador de peticion:");
+						String input = teclat.next();
+						Usuari usuariA = LlistaUsu.cercaUsuari(input);
+						if (usuariA == null) System.out.println("ERROR: Usuario inexistente"); break;
+						System.out.println("Introduzca el correo del usuario al que se le hace la peticion:");
+						input = teclat.next();
+						Usuari usuariB = LListaUsu.cercaUsuari(input);
+						if (usuariB == null) System.out.println("ERROR: Usuario inexistente"); break;
+						System.out.println("Introduzca el codigo del producto/servicio que se ofrece:");
+						String codiA = teclat.next();
+						System.out.println("Introduzca el codigo del producto/servicio que se espera recibir:");
+						String codiB = teclat.next();
+						
+						int codiPet = -1;
+						boolean ok = false;
+						while (!ok) {
+							codiPet++;
+							ok = true;
+							for (int i = 0; i < LlistaPet.getNumElem(); i++) {
+								if (LlistaPet[i].getCodi() == codiPet) ok = false;
+							}
 						}
-
-						Peticio pet = new Peticio(codi, UsuariA, UsuariB, codiProducteA, codiProducteB);
-						Peti.afegirPet(pet);
+						
+						LlistaPet.afegirPet(new Peticio(codiPet, usuariA, usuariB, codiA, codiB));
 
 						break;
 					
 					case 10:
+						
+						System.out.println("Introduzca el codigo de peticion:");
+						String codi = teclat.next();
+						for (int i = 0; i < LlistaPet.getNumElem(); i++) {
+							if (LlistaPet[i].getCodi() == codi) {
+								int petI = i;
+							}
+						}
+						
+						// ... mostrar detalles peticion? 
+						
+						System.out.println("Que desea hacer?");
+						System.out.println("   1 = Aceptar");
+						System.out.println("   2 = Rechazar");
+						System.out.println("   0 = Cancelar");
+						String op = teclat.next();
+						if (op == 1) {
+							System.out.println("Introduzca valoracion para el usuario A (creador peticion):");
+							//
+							System.out.println("Introduzca valoracion para el usuario B (receptor peticion):");
+							//
+							LlistaPet[petI].AcceptarPet(valA, valB);
+						}
+						else if (op == 2) {
+							LlistaPet[petI].RefusarPet(valA, valB);
+						}
+						
+						break;
+					
+					case 11:
 						//Mostrar peticiones pendientes
 						
 						LlistaPeticions PetPend = Peti.mostrarPetPendents(estat);
@@ -151,7 +188,7 @@ public class MAIN {
 						
 						
 						break;
-					case 11:
+					case 12:
 						//Mostrar peticiones aceptadas
 
 						LlistaPeticions PetAcc = Peti.mostrarPetAcceptades(estat);
@@ -160,7 +197,7 @@ public class MAIN {
 						
 						break;
 					
-					case 12:
+					case 13:
 						//Mostrar peticiones rechazadas
 
 						LlistaPeticions PetRef = Peti.mostrarPetRefusades(estat);
@@ -169,11 +206,11 @@ public class MAIN {
 
 						break;
 
-                    case 13:
-                        sortir = true;
-                        SobreescriureFitxer("old.txt",LlistaP);
-                        break;
                     case 14:
+                        sortir = true;
+                        SobreescriureFitxer("old.txt",LlistaProd);
+                        break;
+                    case 15:
                     	sortir = true;
                     	break;
 
