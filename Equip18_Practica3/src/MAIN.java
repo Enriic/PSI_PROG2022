@@ -17,7 +17,7 @@ public class MAIN {
 
 
 
-		LlistaProductes LlistaP = new LlistaProductes(1); 	//creem la llista
+		LlistaProductes LlistaP = new LlistaProductes(1); 	//creem la llista productes
 		LlistaPeticions Peti = new LlistaPeticions(1);					//creem la llista peticions
 		CarregarLlistaFitxer("old.txt", LlistaP);			
 		@SuppressWarnings("resource")
@@ -35,9 +35,13 @@ public class MAIN {
             System.out.println("6. Donar de baixa Be");
             System.out.println("7. Donar de baixa Servei");
             System.out.println("8. Servei amb mes intercanvis");
-            System.out.println("9. Guardar i sortir");
-            System.out.println("10. Sortir sense guardar");
-			System.out.println("11. Afegir Peticio");
+			System.out.println("9. Afegir Peticio");
+			System.out.println("10. Mostrar peticions pendents");
+			System.out.println("11. Mostrar peticions acceptades");
+			System.out.println("12. Mostrar peticions refusades");
+            System.out.println("13. Guardar i sortir");
+            System.out.println("14. Sortir sense guardar");
+			
             
             try {
  
@@ -47,8 +51,10 @@ public class MAIN {
                 @SuppressWarnings("resource")
 				Scanner teclat = new Scanner(System.in);
                 
-                switch (opcio) {
+                int estat = 0;
+				switch (opcio) {
                     case 1:
+
                     	System.out.println("Escriu els seguents valors:");
                     	System.out.println("ID:");
                     	String id = teclat.next();
@@ -66,6 +72,7 @@ public class MAIN {
                     	Be B = new Be(id, "Be", descripcio, amplada, altura, fons, pes);
                     	LlistaP.afegirProducte(B);
                         break;
+
                     case 2:
                     	
                     	System.out.println("Escriu els seguents valors:");
@@ -85,7 +92,9 @@ public class MAIN {
                     	LlistaP.afegirProducte(S);
                     	
                         break;
+
                     case 3:
+
                     	System.out.println("\n\n");
                 		System.out.print(LlistaP.toString());
                         break;
@@ -111,16 +120,10 @@ public class MAIN {
                     case 8:
                     	System.out.println("Servei amb mes intercanvis:");
                     	break;
-                    case 9:
-                        sortir = true;
-                        SobreescriureFitxer("old.txt",LlistaP);
-                        break;
-                    case 10:
-                    	sortir = true;
-                    	break;
-					case 11:
+
+					case 9:
 						System.out.println("A quin usuari li vols fer la peticio?");
-						Usuari UsuariB =teclat.next();	//Mirar error
+						Usuari UsuariB = teclat.next();	//Mirar error
 						System.out.println("Inserti el codi del producte que li interesa: ");
 						String codiProducteB =teclat.next();
 						System.out.println("Indica el teu nom d'usuari:");
@@ -128,16 +131,57 @@ public class MAIN {
 						System.out.println("Inserti el codi del producte per fer l'intercanvi: ");
 						String codiProducteA =teclat.next();
 
+						int codi=0;
 
-						
+<<<<<<< HEAD
+						//wtf ?
+=======
+>>>>>>> 06663a1ef8c4974d33a4fa1a274899eff480383c
 
-						int codi;
-						while (codi != 99999) {
+						if (codi <= 99999) {
 							codi++;
 						}
 
 						Peticio pet = new Peticio(codi, UsuariA, UsuariB, codiProducteA, codiProducteB);
 						Peti.afegirPet(pet);
+
+						break;
+					
+					case 10:
+						//Mostrar peticiones pendientes
+						
+						LlistaPeticions PetPend = Peti.mostrarPetPendents(estat);
+						
+						
+						
+						break;
+					case 11:
+						//Mostrar peticiones aceptadas
+
+						LlistaPeticions PetAcc = Peti.mostrarPetAcceptades(estat);
+						
+						
+						
+						break;
+					
+					case 12:
+						//Mostrar peticiones rechazadas
+
+						LlistaPeticions PetRef = Peti.mostrarPetRefusades(estat);
+
+
+
+						break;
+
+                    case 13:
+                        sortir = true;
+                        SobreescriureFitxer("old.txt",LlistaP);
+                        break;
+                    case 14:
+                    	sortir = true;
+                    	break;
+
+
 						
 						
 
