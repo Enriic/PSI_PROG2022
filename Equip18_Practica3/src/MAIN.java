@@ -133,10 +133,9 @@ public class MAIN {
 
 						int codi=0;
 
-<<<<<<< HEAD
+
 						//wtf ?
-=======
->>>>>>> 06663a1ef8c4974d33a4fa1a274899eff480383c
+
 
 						if (codi <= 99999) {
 							codi++;
