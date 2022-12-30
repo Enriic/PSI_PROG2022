@@ -38,7 +38,7 @@ public class LlistaProductes {
 	public LlistaProductes llistaServeisActius() {
 		LlistaProductes aux = new LlistaProductes(1);
 		for (int i = 0 ; i<numProductes ; i++) {
-			if(llista[i].getClass().getSimpleName() == "Servei" && llista[i].esActiu()) {
+			if(this.llista[i] instanceof Servei && llista[i].esActiu()) {
 				aux.afegirProducte(llista[i]);
 			}
 		}
@@ -60,7 +60,7 @@ public class LlistaProductes {
 	public LlistaProductes llistaBensActius() {
 		LlistaProductes aux = new LlistaProductes(1);
 		for (int i = 0 ; i<numProductes ; i++) {
-			if(llista[i].getClass().getSimpleName() == "Be" && llista[i].esActiu()) {
+			if(this.llista[i] instanceof Servei && llista[i].esActiu()) {
 				aux.afegirProducte(llista[i]);
 			}
 		}
