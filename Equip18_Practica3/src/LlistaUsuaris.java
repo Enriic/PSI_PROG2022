@@ -37,4 +37,11 @@ public class LlistaUsuaris {
         return L;
 
     }
+    
+    public Usuari cercaUsuari(String email) {
+    	for (int i = 0; i < numUsuaris; i++) {
+    		if (Llista[i].getCorreu() == email) return Llista[i];
+    	}
+    	return null;
+    }
 }
