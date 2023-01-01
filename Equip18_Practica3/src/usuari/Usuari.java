@@ -1,11 +1,14 @@
 package usuari;
-public class Usuari {
+import java.io.Serializable;
+
+public class Usuari  implements Serializable {
+	static final long serialVersionUID = 1;
     //ALIAS - CORREU ELECTRONIC - CODI POSTAL - INTERCANVIS - PRODUCTES
-    private String nom;
-    private String correu;
-    private String codiPostal;
-    private int intercanvis;
-    private int valoracio;
+    protected String nom;
+    protected String correu;
+    protected String codiPostal;
+    protected int intercanvis;
+    protected int valoracio;
 
 
     public Usuari(String nom, String correu, String codiPostal) {

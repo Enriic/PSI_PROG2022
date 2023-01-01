@@ -1,4 +1,6 @@
 package usuari;
+import java.util.*;
+import java.io.*;
 
 
 public class LlistaUsuaris {
@@ -47,4 +49,12 @@ public class LlistaUsuaris {
     	}
     	return null;
     }
+    
+    public LlistaUsuaris carregarFitxer() {				// A MIRAR
+    	LlistaUsuaris L = new LlistaUsuaris(5);
+    	return L;
+    }
+    
+    
+ 
 }

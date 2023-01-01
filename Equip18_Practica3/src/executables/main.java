@@ -20,6 +20,7 @@ public class main {
 		LU1.afegirUsuari(user2);
 		LU1.afegirUsuari(user3);
 		LU1.afegirUsuari(user4);
+		//SobreescriureFitxerUsuari("ususaris.ser",LU1);			A MIRAR
 
 
 		Peticio pet1 = new Peticio(12345, user1, user2, "123A", "456B");		//Prueba peticion 1
@@ -138,11 +139,11 @@ public class main {
 						System.out.println("Introduzca el correo del usuario creador de peticion:");
 						String input = teclat.next();
 						Usuari usuariA = LU1.cercaUsuari(input);
-						if (usuariA == null) System.out.println("ERROR: Usuario inexistente"); break;
+						if (usuariA == null) System.out.println("ERROR: Usuario inexistente");
 						System.out.println("Introduzca el correo del usuario al que se le hace la peticion:");
 						input = teclat.next();
 						Usuari usuariB = LU1.cercaUsuari(input);
-						if (usuariB == null) System.out.println("ERROR: Usuario inexistente"); break;
+						if (usuariB == null) System.out.println("ERROR: Usuario inexistente");
 						System.out.println("Introduzca el codigo del producto/servicio que se ofrece:");
 						String codiA = teclat.next();
 						System.out.println("Introduzca el codigo del producto/servicio que se espera recibir:");
@@ -154,7 +155,7 @@ public class main {
 							codiPet++;
 							ok = true;
 							for (int i = 0; i < LlistaPet.getNumElem(); i++) {
-								if (LlistaPet[i].getCodi() == codiPet) ok = false;
+								//if (LlistaPet[i].getCodi() == codiPet) ok = false;
 							}
 						}
 						
@@ -162,7 +163,7 @@ public class main {
 
 						break;
 					
-					case 10:
+					/*case 10:
 						
 						System.out.println("Introduzca el codigo de peticion:");
 						String codi = teclat.next();
@@ -178,8 +179,8 @@ public class main {
 						System.out.println("   1 = Aceptar");
 						System.out.println("   2 = Rechazar");
 						System.out.println("   0 = Cancelar");
-						int op = teclat.nextInt();
-						if (op == 1) {
+						int op = teclat.nextInt();*/
+						/*if (op == 1) {
 							System.out.println("Introduzca valoracion para el usuario A (creador peticion):");
 							//
 							System.out.println("Introduzca valoracion para el usuario B (receptor peticion):");
@@ -188,14 +189,14 @@ public class main {
 						}
 						else if (op == 2) {
 							LlistaPet[petI].RefusarPet(valA, valB);
-						}
+						}*/
 						
-						break;
+						//break;
 					
 					case 11:
 						//Mostrar peticiones pendientes
 						
-						LlistaPeticions petPend = Peti.mostrarPetPendents(estat);
+						//LlistaPeticions petPend = Peti.mostrarPetPendents(estat);
 						
 						
 						
@@ -203,7 +204,7 @@ public class main {
 					case 12:
 						//Mostrar peticiones aceptadas
 
-						LlistaPeticions petAcc = Peti.mostrarPetAcceptades(estat);
+						//LlistaPeticions petAcc = Peti.mostrarPetAcceptades(estat);
 						
 						
 						
@@ -212,7 +213,7 @@ public class main {
 					case 13:
 						//Mostrar peticiones rechazadas
 
-						LlistaPeticions petRef = Peti.mostrarPetRefusades(estat);
+						//LlistaPeticions petRef = Peti.mostrarPetRefusades(estat);
 
 
 
@@ -346,4 +347,7 @@ public class main {
 		bw.close();
 		L.escriureLlistaAlFitxer();
 	}
+	
+	
+
 }
