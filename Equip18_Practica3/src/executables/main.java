@@ -1,6 +1,13 @@
+package executables;
+
 import java.util.*;
 import java.io.*;
-public class MAIN {
+import usuari.*;
+import peticions.*;
+import productes.*;
+
+
+public class main {
 
 	public static void main(String[] args) throws IOException {
 
@@ -8,6 +15,11 @@ public class MAIN {
 		Usuari user2= new Usuari("Argi", "argiderirurt@gmail.com", "31001");				//Prueba user 2
 		Usuari user3= new Usuari("Albert", "alberturv@gmail.com", "54850");				//Prueba user 3
 		Usuari user4= new Usuari("Ramzi", "ramziurv@gmail.com", "98775");					//Prueba user 4
+		LlistaUsuaris LU1 = new LlistaUsuaris (5);
+		LU1.afegirUsuari(user1);
+		LU1.afegirUsuari(user2);
+		LU1.afegirUsuari(user3);
+		LU1.afegirUsuari(user4);
 
 
 		Peticio pet1 = new Peticio(12345, user1, user2, "123A", "456B");		//Prueba peticion 1
@@ -125,11 +137,11 @@ public class MAIN {
 					case 9:
 						System.out.println("Introduzca el correo del usuario creador de peticion:");
 						String input = teclat.next();
-						Usuari usuariA = LlistaUsu.cercaUsuari(input);
+						Usuari usuariA = LU1.cercaUsuari(input);
 						if (usuariA == null) System.out.println("ERROR: Usuario inexistente"); break;
 						System.out.println("Introduzca el correo del usuario al que se le hace la peticion:");
 						input = teclat.next();
-						Usuari usuariB = LListaUsu.cercaUsuari(input);
+						Usuari usuariB = LU1.cercaUsuari(input);
 						if (usuariB == null) System.out.println("ERROR: Usuario inexistente"); break;
 						System.out.println("Introduzca el codigo del producto/servicio que se ofrece:");
 						String codiA = teclat.next();
@@ -166,7 +178,7 @@ public class MAIN {
 						System.out.println("   1 = Aceptar");
 						System.out.println("   2 = Rechazar");
 						System.out.println("   0 = Cancelar");
-						String op = teclat.next();
+						int op = teclat.nextInt();
 						if (op == 1) {
 							System.out.println("Introduzca valoracion para el usuario A (creador peticion):");
 							//

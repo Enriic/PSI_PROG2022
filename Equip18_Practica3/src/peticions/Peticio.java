@@ -1,3 +1,6 @@
+package peticions;
+import usuari.*;
+
 public class Peticio {
 	private int codi;
 	private Usuari usuariA; 		// Usuario que HACE la petición

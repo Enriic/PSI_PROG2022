@@ -1,3 +1,4 @@
+package peticions;
 
 
 public class LlistaPeticions {

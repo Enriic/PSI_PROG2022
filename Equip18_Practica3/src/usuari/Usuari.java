@@ -1,3 +1,4 @@
+package usuari;
 public class Usuari {
     //ALIAS - CORREU ELECTRONIC - CODI POSTAL - INTERCANVIS - PRODUCTES
     private String nom;

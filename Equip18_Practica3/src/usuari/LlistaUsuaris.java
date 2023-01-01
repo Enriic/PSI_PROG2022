@@ -1,3 +1,6 @@
+package usuari;
+
+
 public class LlistaUsuaris {
     private Usuari [] Llista;
     private int numUsuaris;

@@ -1,3 +1,4 @@
+package productes;
 
 
 public abstract class Producte {
