@@ -11,22 +11,25 @@ public class main {
 
 	public static void main(String[] args) throws IOException {
 
-		Usuari user1= new Usuari("Gerard", "marinperezgeri@gmail.com", "43850");			//Prueba user 1
-		Usuari user2= new Usuari("Argi", "argiderirurt@gmail.com", "31001");				//Prueba user 2
-		Usuari user3= new Usuari("Albert", "alberturv@gmail.com", "54850");				//Prueba user 3
-		Usuari user4= new Usuari("Ramzi", "ramziurv@gmail.com", "98775");					//Prueba user 4
-		LlistaUsuaris LU1 = new LlistaUsuaris (5);
-		LU1.afegirUsuari(user1);
-		LU1.afegirUsuari(user2);
-		LU1.afegirUsuari(user3);
-		LU1.afegirUsuari(user4);
-		//SobreescriureFitxerUsuari("ususaris.ser",LU1);			A MIRAR
-
-
-		Peticio pet1 = new Peticio(12345, user1, user2, "123A", "456B");		//Prueba peticion 1
-		Peticio pet2 = new Peticio(11111, user3, user4, "789A", "321B");		//Prueba peticion 2
+		Usuari user1= new Usuari("Gerard", "marinperezgeri@gmail.com", "43850","Gerard1234");			//Prueba user 1
+		Usuari user2= new Usuari("Argi", "argiderirurt@gmail.com", "31001","4rg1");				//Prueba user 2
+		Usuari user3= new Usuari("Albert", "alberturv@gmail.com", "54850","4tun");				//Prueba user 3
+		Usuari user4= new Usuari("Ramzi", "ramziurv@gmail.com", "98775","P3scad0R");				//Prueba user 4
+		//LlistaUsuaris LU1 = CarregarFitxerSer();
+		LlistaUsuaris llistausuaris = new LlistaUsuaris(1);
+		CarregarFitxerSer(llistausuaris);
+		
+		System.out.println(llistausuaris.toString());
 		
 
+		Peticio pet1 = new Peticio(12345, llistausuaris.getUsuariFromLlista(1), llistausuaris.getUsuariFromLlista(2), "123A", "456B");		//Prueba peticion 1
+		Peticio pet2 = new Peticio(11111, llistausuaris.getUsuariFromLlista(3), llistausuaris.getUsuariFromLlista(4), "789A", "321B");		//Prueba peticion 2
+	
+		llistausuaris.afegirUsuari(user1);
+		llistausuaris.afegirUsuari(user2);
+		llistausuaris.afegirUsuari(user3);
+		llistausuaris.afegirUsuari(user4);
+		//SobreescriureFitxerSer(LU2);
 
 
 
@@ -136,7 +139,7 @@ public class main {
                     	break;
 
 					case 9:
-						System.out.println("Introduzca el correo del usuario creador de peticion:");
+						/*System.out.println("Introduzca el correo del usuario creador de peticion:");
 						String input = teclat.next();
 						Usuari usuariA = LU1.cercaUsuari(input);
 						if (usuariA == null) System.out.println("ERROR: Usuario inexistente");
@@ -147,7 +150,7 @@ public class main {
 						System.out.println("Introduzca el codigo del producto/servicio que se ofrece:");
 						String codiA = teclat.next();
 						System.out.println("Introduzca el codigo del producto/servicio que se espera recibir:");
-						String codiB = teclat.next();
+						String codiB = teclat.next();*/
 						
 						int codiPet = -1;
 						boolean ok = false;
@@ -159,7 +162,7 @@ public class main {
 							}
 						}
 						
-						LlistaPet.afegirPet(new Peticio(codiPet, usuariA, usuariB, codiA, codiB));
+						//LlistaPet.afegirPet(new Peticio(codiPet, usuariA, usuariB, codiA, codiB));
 
 						break;
 					
@@ -348,6 +351,44 @@ public class main {
 		L.escriureLlistaAlFitxer();
 	}
 	
+	public static void SobreescriureFitxerSer(LlistaUsuaris L) {
+		ObjectOutputStream fit;
+		try {
+			fit = new ObjectOutputStream (new FileOutputStream("usuaris.ser"));
+			for (int i = 0 ; i<L.getNumUsuaris(); i++) {
+				fit.writeObject(L.getUsuariFromLlista(i));
+			}
+			fit.close();
+		}
+		catch (IOException e) {
+			System.out.println("Error");
+		}
+		
+	}
 	
-
+	public static void CarregarFitxerSer(LlistaUsuaris L) {
+		ObjectInputStream fit;
+		try {
+			
+			fit = new ObjectInputStream(new FileInputStream("usuaris.ser"));
+			
+			while(true) {
+				L.afegirUsuari((Usuari)fit.readObject());
+				
+			}
+		
+		}
+		catch (EOFException e) {
+			System.out.println("Llegit correctament");
+		}
+		catch (IOException e) {
+			System.out.println("Error leer fitxer");
+		}
+		catch (ClassNotFoundException e) {
+			System.out.println("Error, no es troba la classe usuari."+e);
+		}
+		catch (ClassCastException e){
+			System.out.println("Error, el format de l'arxiu no és correcte per la definició actual de la classe usuari."+e);
+		}
+}
 }
