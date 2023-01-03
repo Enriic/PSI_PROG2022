@@ -44,6 +44,7 @@ public class Accions extends JDialog{
 	  
 	  
 	  
+	  
 	  public static void demanarCodi(String codi,LlistaUsuaris L, boolean trobat) {
 		  
 		  int v = 0;
@@ -72,7 +73,7 @@ public class Accions extends JDialog{
 	  }
 	  
 
-		public static void CarregarLlistaFitxer(String nomFitxer, LlistaProductes LlistaP ) throws IOException{
+	  public static void CarregarLlistaFitxer(String nomFitxer, LlistaProductes LlistaP ) throws IOException{
 			String type;
 			String ID;
 			String descripcio;
@@ -168,7 +169,7 @@ public class Accions extends JDialog{
 			
 		}
 		
-		public static void SobreescriureFitxer(String fitxer, LlistaProductes L) throws IOException {
+	  public static void SobreescriureFitxer(String fitxer, LlistaProductes L) throws IOException {
 			
 			BufferedWriter bw = new BufferedWriter(new FileWriter(fitxer));
 			bw.write("");
