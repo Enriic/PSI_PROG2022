@@ -26,36 +26,50 @@ public class Accions extends JDialog{
 	
 	  
 	  public Accions(LlistaUsuaris L) {
-		  String codi = JOptionPane.showInputDialog("Introdueix codi d'usuari: ");
-		  boolean incorrecte = false;
-		  while (codi == null || codi.equals("") || !incorrecte) {
-				JOptionPane.showMessageDialog(null, "Cal un codi", "ERROR", JOptionPane.ERROR_MESSAGE);
-				codi = JOptionPane.showInputDialog("Introdueix codi: ");
-				for (int i = 0 ;  i< L.getNumUsuaris(); i++) {
-					if (L.getClass().equals(codi)) {
-						incorrecte = false;
-					}
-					
-				}
-			}
+		  
+		  boolean trobat = false;
+		  demanarCodi("",L,trobat);
+		  if(trobat) {
+			  System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+		  }
 	  }
 	  
 	  public static void main(String[] args) {
 		  
-		  Usuari user1= new Usuari("Gerard", "marinperezgeri@gmail.com", "43850","Gerard1234");			//Prueba user 1
-		  Usuari user2= new Usuari("Argi", "argiderirurt@gmail.com", "31001","4rg1");				//Prueba user 2
-		  Usuari user3= new Usuari("Albert", "alberturv@gmail.com", "54850","4tun");				//Prueba user 3
-		  Usuari user4= new Usuari("Ramzi", "ramziurv@gmail.com", "98775","P3scad0R");				//Prueba user 4
 		  LlistaUsuaris LU1 = new LlistaUsuaris (5);
-		  LU1.afegirUsuari(user1);
-		  LU1.afegirUsuari(user2);
-		  LU1.afegirUsuari(user3);
-		  LU1.afegirUsuari(user4);
+		  CarregarFitxerSer(LU1);
+		  //SobreescriureFitxerSer(LU1);
 		  new Accions(LU1);
 	  }
 	  
 	  
 	  
+	  public static void demanarCodi(String codi,LlistaUsuaris L, boolean trobat) {
+		  
+		  int v = 0;
+		   codi = JOptionPane.showInputDialog("Introdueix codi d'usuari: ");
+		  for (int i = 0 ;  i< L.getNumUsuaris(); i++) {
+				if (L.getUsuariFromLlista(i).getCodi().equals(codi)) {
+					JOptionPane.showMessageDialog(null, "BIEN", "BIEN2", JOptionPane.OK_OPTION);
+					trobat = true;
+					
+				}
+				
+			}
+		  
+		  while ((codi == null || codi.equals("") ||!trobat)  && (v<5) ) {
+				JOptionPane.showMessageDialog(null, "Cal un codi", "ERROR", JOptionPane.ERROR_MESSAGE);
+				codi = JOptionPane.showInputDialog("Introdueix codi: ");
+				for (int i = 0 ;  i< L.getNumUsuaris(); i++) {
+					if (L.getUsuariFromLlista(i).getCodi().equals(codi)) {
+						JOptionPane.showMessageDialog(null, "BIEN", "BIEN2", JOptionPane.OK_OPTION);
+						trobat = true;
+					}
+					
+				}
+				v++;
+			}
+	  }
 	  
 
 		public static void CarregarLlistaFitxer(String nomFitxer, LlistaProductes LlistaP ) throws IOException{
