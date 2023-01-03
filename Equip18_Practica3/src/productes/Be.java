@@ -98,7 +98,6 @@ public class Be extends Producte{
 		}
 	}
 	
-	@Override
 	public String toString() {
 		return "[ID = " + this.getID() + " | tipus = " + this.getTipus() + " | descripcio = " + this.getDescripcio() + " | data de publicacio = " + this.getDataInicial().toString() + " | amplada = " + amplada + " | altura = " + altura + " | fons = " + fons + " | pes = " + pes + " | dataIntercanvi = "
 				+ dataIntercanvi.toString() + " | actiu = " + actiu + "]\n";
