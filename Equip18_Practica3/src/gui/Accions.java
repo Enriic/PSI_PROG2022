@@ -27,12 +27,11 @@ public class Accions extends JDialog{
 	  
 	  public Accions(LlistaUsuaris L) {
 		  
-		  boolean trobat = false;
-		  demanarCodi("",L,trobat);
-		  if(trobat) {
-			  System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+		  if(demanarCodi("",L)) {
+			  System.out.println("interfaz de cada usuari");
 		  }
 	  }
+	  
 	  
 	  public static void main(String[] args) {
 		  
@@ -43,13 +42,15 @@ public class Accions extends JDialog{
 	  }
 	  
 	  
-	  
-	  
-	  public static void demanarCodi(String codi,LlistaUsuaris L, boolean trobat) {
+	  public static void mostrarInterficie() {
 		  
+	  }
+	  public static boolean demanarCodi(String codi,LlistaUsuaris L) {
+		  boolean trobat= false;
 		  int v = 0;
 		   codi = JOptionPane.showInputDialog("Introdueix codi d'usuari: ");
-		  for (int i = 0 ;  i< L.getNumUsuaris(); i++) {
+		  try {
+				  for (int i = 0 ;  i< L.getNumUsuaris(); i++) {
 				if (L.getUsuariFromLlista(i).getCodi().equals(codi)) {
 					JOptionPane.showMessageDialog(null, "BIEN", "BIEN2", JOptionPane.OK_OPTION);
 					trobat = true;
@@ -58,7 +59,7 @@ public class Accions extends JDialog{
 				
 			}
 		  
-		  while ((codi == null || codi.equals("") ||!trobat)  && (v<5) ) {
+		  while (( codi.equals("") ||!trobat)  && (v<5) ) {
 				JOptionPane.showMessageDialog(null, "Cal un codi", "ERROR", JOptionPane.ERROR_MESSAGE);
 				codi = JOptionPane.showInputDialog("Introdueix codi: ");
 				for (int i = 0 ;  i< L.getNumUsuaris(); i++) {
@@ -66,10 +67,13 @@ public class Accions extends JDialog{
 						JOptionPane.showMessageDialog(null, "BIEN", "BIEN2", JOptionPane.OK_OPTION);
 						trobat = true;
 					}
-					
 				}
 				v++;
 			}
+		  }catch (NullPointerException e) {
+			  System.out.println("cancelado");
+		  }
+		  return trobat;
 	  }
 	  
 
