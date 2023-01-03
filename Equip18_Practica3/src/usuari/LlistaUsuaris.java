@@ -4,27 +4,27 @@ import java.io.*;
 
 
 public class LlistaUsuaris {
-    private Usuari [] Llista;
+    private Usuari [] llista;
     private int numUsuaris;
 
     public LlistaUsuaris(int numUsuaris) {
         if (numUsuaris >0) {
-        	this.Llista = new Usuari [numUsuaris];
+        	this.llista = new Usuari [numUsuaris];
             numUsuaris = 0;
         }
     }
 
 
     public void afegirUsuari(Usuari X) {
-        if (this.numUsuaris >= this.Llista.length) {
+        if (this.numUsuaris >= this.llista.length) {
             Usuari [] aux = new Usuari [this.numUsuaris+1];
             for (int i = 0; i < this.numUsuaris; i++)
-                aux[i]=Llista[i];
+                aux[i]=llista[i];
 
-            this.Llista = aux;
+            this.llista = aux;
             }
 
-        this.Llista[numUsuaris] = X.copia();
+        this.llista[numUsuaris] = X.copia();
         this.numUsuaris ++;
         }
 
@@ -36,8 +36,8 @@ public class LlistaUsuaris {
     public LlistaUsuaris mostrarUsuarisLlindar(int llindar) {
     	LlistaUsuaris L = new LlistaUsuaris(5);
         for (int i = 0; i< this.numUsuaris; i++) {
-            if (this.Llista[i].getValoracio() >= llindar)
-                L.afegirUsuari(this.Llista[i]);
+            if (this.llista[i].getValoracio() >= llindar)
+                L.afegirUsuari(this.llista[i]);
         }
         return L;
 
@@ -46,13 +46,13 @@ public class LlistaUsuaris {
     
     
 	public String toString() {
-		return Arrays.toString(Llista) + ", numUsuaris=" + numUsuaris + "]";
+		return Arrays.toString(llista) + ", numUsuaris=" + numUsuaris + "]";
 	}
 
 
 	public Usuari cercaUsuari(String email) {
     	for (int i = 0; i < numUsuaris; i++) {
-    		if (this.Llista[i].getCorreu() == email) return Llista[i];
+    		if (this.llista[i].getCorreu() == email) return llista[i];
     	}
     	return null;
     }
@@ -64,7 +64,7 @@ public class LlistaUsuaris {
     
 
     public Usuari getUsuariFromLlista(int posicio) {
-        return this.Llista[posicio].copia();
+        return this.llista[posicio].copia();
     }
     
  

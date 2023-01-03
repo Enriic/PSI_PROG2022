@@ -42,7 +42,13 @@ public class Peticio {
 	public String getCodiProducteB() {
 		return codiProducteB;
 	}
-
+	
+	public Peticio copia() {
+		Peticio aux = new Peticio(this.codi,this.usuariA,this.usuariB,this.codiProducteA,this.codiProducteB);
+		aux.estat = this.getEstat();
+		
+		return aux;
+	}
 
 	
 	public void AcceptarPet(int valA, int valB) {

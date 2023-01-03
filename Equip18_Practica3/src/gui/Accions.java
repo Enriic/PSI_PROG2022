@@ -1,37 +1,22 @@
 package gui;
 import usuari.*;
-
 import java.awt.*;
-import java.awt.event.*;
-import java.io.BufferedWriter;
-import java.io.EOFException;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.util.Locale;
-import java.util.Scanner;
-
+import java.io.*;
+import java.util.*;
 import javax.swing.*;
-
-import productes.Be;
-import productes.Data;
-import productes.LlistaProductes;
-import productes.Servei;
+import productes.*;
+import peticions.*;
 
 public class Accions extends JDialog{
+	private static String codi;
 	
 	  
 	  public Accions(LlistaUsuaris L) {
 		  
-		  if(demanarCodi("",L)) {
-			  System.out.println("interfaz de cada usuari");
+		  if(demanarCodi(L)) {
+			  new Window("TEST");
 		  }
 	  }
-	  
 	  
 	  public static void main(String[] args) {
 		  
@@ -41,11 +26,10 @@ public class Accions extends JDialog{
 		  new Accions(LU1);
 	  }
 	  
-	  
 	  public static void mostrarInterficie() {
 		  
 	  }
-	  public static boolean demanarCodi(String codi,LlistaUsuaris L) {
+	  public static boolean demanarCodi(LlistaUsuaris L) {
 		  boolean trobat= false;
 		  int v = 0;
 		   codi = JOptionPane.showInputDialog("Introdueix codi d'usuari: ");
@@ -54,7 +38,6 @@ public class Accions extends JDialog{
 				if (L.getUsuariFromLlista(i).getCodi().equals(codi)) {
 					JOptionPane.showMessageDialog(null, "BIEN", "BIEN2", JOptionPane.OK_OPTION);
 					trobat = true;
-					
 				}
 				
 			}

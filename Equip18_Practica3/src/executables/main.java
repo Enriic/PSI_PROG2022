@@ -19,12 +19,9 @@ public class main {
 		LlistaUsuaris llistausuaris = new LlistaUsuaris(1);
 		CarregarFitxerSer(llistausuaris);
 		
-		System.out.println(llistausuaris.toString());
-		
 
-		Peticio pet1 = new Peticio(12345, llistausuaris.getUsuariFromLlista(1), llistausuaris.getUsuariFromLlista(2), "123A", "456B");		//Prueba peticion 1
-		Peticio pet2 = new Peticio(11111, llistausuaris.getUsuariFromLlista(3), llistausuaris.getUsuariFromLlista(4), "789A", "321B");		//Prueba peticion 2
-	
+		//Peticio pet1 = new Peticio(12345, llistausuaris.getUsuariFromLlista(1), llistausuaris.getUsuariFromLlista(2), "123A", "456B");		//Prueba peticion 1
+		//Peticio pet2 = new Peticio(11111, llistausuaris.getUsuariFromLlista(3), llistausuaris.getUsuariFromLlista(4), "789A", "321B");		//Prueba peticion 2
 		llistausuaris.afegirUsuari(user1);
 		llistausuaris.afegirUsuari(user2);
 		llistausuaris.afegirUsuari(user3);
@@ -35,7 +32,7 @@ public class main {
 
 		LlistaProductes LlistaProd = new LlistaProductes(1); 	//creem la llista productes
 		LlistaPeticions LlistaPet = new LlistaPeticions(1);					//creem la llista peticions
-		CarregarLlistaFitxer("old.txt", LlistaProd);			
+		CarregarLlistaFitxer("Productes.txt", LlistaProd);			
 		@SuppressWarnings("resource")
 		Scanner sn = new Scanner(System.in);
         boolean sortir = false;
@@ -224,7 +221,7 @@ public class main {
 
                     case 14:
                         sortir = true;
-                        SobreescriureFitxer("old.txt",LlistaProd);
+                        SobreescriureFitxer("Productes.txt",LlistaProd);
                         break;
                     case 15:
                     	sortir = true;

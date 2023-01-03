@@ -46,7 +46,7 @@ public class Servei extends Producte{
 	public void escriureFitxer() {
 		BufferedWriter bw = null;
 		try {
-			File fitxer = new File("old.txt");
+			File fitxer = new File("Productes.txt");
 
 			bw = new BufferedWriter(new FileWriter(fitxer, true));
 			int numActiu;
