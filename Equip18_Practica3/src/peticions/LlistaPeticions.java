@@ -64,6 +64,12 @@ public class LlistaPeticions {
 	public int getNumElem() {
 		return numElem;
 	}
+
 	
+	public void escriureLlistaAlFitxer() {
+		for (int i = 0; i < numElem; i++) {
+			llista[i].escriureFitxer();
+		}
+	}
 }
 

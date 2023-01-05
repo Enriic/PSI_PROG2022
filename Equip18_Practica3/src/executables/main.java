@@ -6,7 +6,6 @@ import usuari.*;
 import peticions.*;
 import productes.*;
 
-
 public class main {
 
 	public static void main(String[] args) throws IOException {
