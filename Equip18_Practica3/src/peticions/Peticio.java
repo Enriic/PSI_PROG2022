@@ -1,4 +1,9 @@
 package peticions;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import usuari.*;
 
 public class Peticio {
@@ -73,6 +78,22 @@ public class Peticio {
 	}
 
 
+	public void escriureFitxer() {
+		BufferedWriter bw = null;
+		try {
+			File fitxer = new File("Peticions.txt");
+
+			bw = new BufferedWriter(new FileWriter(fitxer));
+			bw.write(this.getCodi()+";"+this.getUsuariA()+";"+this.getUsuariB()+";"+this.getCodiProducteA()+";"+this.getCodiProducteB()+";"+this.getEstat()+";\n");
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				bw.close();
+			} catch (Exception e) {
+			}
+		}
+	}
 
 	public String toString(){
 		return "Codi: " +getCodi()+ " Usuari que demana: "+getUsuariA()+ " Usuari al que se li fa la oferta: "+getUsuariB()+ "Codi del producte A: "+getCodiProducteA()+ "Codi del producte B: " +getCodiProducteB();
