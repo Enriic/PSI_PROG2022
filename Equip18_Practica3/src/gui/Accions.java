@@ -26,10 +26,8 @@ public class Accions extends JDialog{
 		  new Accions(LU1);
 	  }
 	  
-	  public static void mostrarInterficie() {
-		  
-	  }
-	  public static boolean demanarCodi(LlistaUsuaris L) {
+	  
+	 	  public static boolean demanarCodi(LlistaUsuaris L) {
 		  boolean trobat= false;
 		  int v = 0;
 		   codi = JOptionPane.showInputDialog("Introdueix codi d'usuari: ");
