@@ -55,9 +55,12 @@ public class Peticio {
 		return aux;
 	}
 
+	public void setEstat(int n) {
+		estat = n;
+	}
 	
 	public void AcceptarPet(int valA, int valB) {
-		estat = 1;
+		setEstat(1);
 		
 		if((0<valA && valA<5) && (0<valB && valB<5)){
 		
@@ -73,7 +76,7 @@ public class Peticio {
 	
 
 	public void RefusarPet() {
-		estat = 2;
+		setEstat(2);
 
 	}
 
@@ -84,7 +87,11 @@ public class Peticio {
 			File fitxer = new File("Peticions.txt");
 
 			bw = new BufferedWriter(new FileWriter(fitxer));
-			bw.write(this.getCodi()+";"+this.getUsuariA()+";"+this.getUsuariB()+";"+this.getCodiProducteA()+";"+this.getCodiProducteB()+";"+this.getEstat()+";\n");
+			bw.write(this.getCodi()+";["+this.getUsuariA().getNom()+";"+this.getUsuariA().getCorreu()+";"+this.getUsuariA().getCodiPostal()+
+					";"+this.getUsuariA().getIntercanvis()+";"+this.getUsuariA().getValoracio()+";"+this.getUsuariA().getCodi()+"];["+
+					this.getUsuariB().getNom()+";"+this.getUsuariB().getCorreu()+";"+this.getUsuariB().getCodiPostal()+";"+
+					this.getUsuariB().getIntercanvis()+";"+this.getUsuariB().getValoracio()+";"+this.getUsuariB().getCodi()+"];"
+					+this.getCodiProducteA()+";"+this.getCodiProducteB()+";"+this.getEstat()+";\n");
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {

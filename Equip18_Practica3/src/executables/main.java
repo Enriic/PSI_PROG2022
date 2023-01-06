@@ -31,7 +31,7 @@ public class main {
 
 		LlistaProductes LlistaProd = new LlistaProductes(1); 	//creem la llista productes
 		LlistaPeticions LlistaPet = new LlistaPeticions(1);					//creem la llista peticions
-		CarregarLlistaFitxer("Productes.txt", LlistaProd);			
+		CarregarLlistaProductesFitxer("Productes.txt", LlistaProd);			
 		@SuppressWarnings("resource")
 		Scanner sn = new Scanner(System.in);
         boolean sortir = false;
@@ -242,8 +242,51 @@ public class main {
 	}
 	
 	
+	public static void CarregarLlistaPeticionsFitxer(String nomFitxer, LlistaPeticions LlistaPet) throws IOException {
+		int codi;
+		Usuari usuariA; 		// Usuario que HACE la petición
+		Usuari usuariB; 		// Usuario que RECIBE la petición
+		String codiProducteA;
+		String codiProducteB;
+		int estat;
+		
+		String frase;
+		Scanner F = new Scanner (new File(nomFitxer));
+		Scanner particio;
+		String stringUsuari;
+		String partsUsuari[];
+		
+		while (F.hasNext()) {
+			frase = F.nextLine();
+			particio = new Scanner(frase);
+			particio.useDelimiter(";");
+			particio.useLocale(Locale.ENGLISH);
+			
+			codi = particio.nextInt();
+			stringUsuari = particio.next();
+			partsUsuari = stringUsuari.split(";");
+			usuariA = new Usuari(partsUsuari[0], partsUsuari[1], partsUsuari[2], partsUsuari[5]);
+			usuariA.setIntercanvis(Integer.parseInt(partsUsuari[3]));
+			usuariA.setIntercanvis(Integer.parseInt(partsUsuari[4]));
+			stringUsuari = particio.next();
+			partsUsuari = stringUsuari.split(";");
+			usuariB = new Usuari(partsUsuari[0], partsUsuari[1], partsUsuari[2], partsUsuari[5]);
+			usuariB.setIntercanvis(Integer.parseInt(partsUsuari[3]));
+			usuariB.setIntercanvis(Integer.parseInt(partsUsuari[4]));
+			codiProducteA = particio.next();
+			codiProducteB = particio.next();
+			estat = particio.nextInt();
+			
+			Peticio pet = new Peticio(codi, usuariA, usuariB, codiProducteA, codiProducteB); pet.setEstat(estat);
+			LlistaPet.afegirPet(pet);
+		}
+		
+		F.close();
+	}
 	
-	public static void CarregarLlistaFitxer(String nomFitxer, LlistaProductes LlistaP ) throws IOException{
+	
+	
+	public static void CarregarLlistaProductesFitxer(String nomFitxer, LlistaProductes LlistaP ) throws IOException{
 		String type;
 		String ID;
 		String descripcio;
