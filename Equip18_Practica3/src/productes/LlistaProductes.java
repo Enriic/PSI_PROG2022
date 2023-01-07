@@ -2,6 +2,8 @@ package productes;
 
 import java.util.*;
 
+import usuari.Usuari;
+
 
 public class LlistaProductes {
 	
@@ -95,7 +97,9 @@ public class LlistaProductes {
 	}
 	
 	
-	
+	 public Producte getProducteFromLlista(int posicio) {
+	        return this.llista[posicio].copia();
+	    }
 	
 	
 }

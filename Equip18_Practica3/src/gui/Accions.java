@@ -11,7 +11,7 @@ public class Accions extends JDialog{
 	private static String codi;
 	
 	  
-	  public Accions(LlistaUsuaris Lu, LlistaPeticions Lp) {
+	  public Accions(LlistaUsuaris Lu, LlistaPeticions Lp,LlistaProductes LlistaP) {
 		  
 		  new DemanarCodi("TEST",Lu);
 		  
@@ -21,9 +21,10 @@ public class Accions extends JDialog{
 		  
 		  LlistaUsuaris LU1 = new LlistaUsuaris (5);
 		  LlistaPeticions Lp= new LlistaPeticions(5);
+		  LlistaProductes Lproductes = new LlistaProductes(5);
 		  CarregarFitxerSer(LU1);
 		  //CarregarLlistaPeticionsFitxer(Lp);
-		  new Accions(LU1,Lp);
+		  new Accions(LU1,Lp,Lproductes);
 	  }
 	  
 	  
@@ -174,46 +175,100 @@ public class Accions extends JDialog{
 			}
 	}
 
-		public static void CarregarLlistaPeticionsFitxer(LlistaPeticions LlistaPet) throws IOException {
-			int codi;
-			Usuari usuariA; 		// Usuario que HACE la petición
-			Usuari usuariB; 		// Usuario que RECIBE la petición
-			String codiProducteA;
-			String codiProducteB;
-			int estat;
-			
+		public static void CarregarLlistaProductesFitxer(String nomFitxer, LlistaProductes LlistaP ) throws IOException{
+			String type;
+			String ID;
+			String descripcio;
+			float amplada;
+			float alçada;
+			float fons;
+			float pes;
+			String data;
 			String frase;
-			Scanner F = new Scanner (new File("Peticions.txt"));
+			int dia, mes, any;
+			int numIntercanvis;
+			int numActiu;
+			boolean actiu;
+			
+			Scanner F = new Scanner (new File(nomFitxer));
 			Scanner particio;
-			String stringUsuari;
-			String partsUsuari[];
 			
 			while (F.hasNext()) {
+				
 				frase = F.nextLine();
-				particio = new Scanner(frase);
+				particio=new Scanner(frase);
 				particio.useDelimiter(";");
 				particio.useLocale(Locale.ENGLISH);
+
+				type = particio.next();
 				
-				codi = particio.nextInt();
-				stringUsuari = particio.next();
-				partsUsuari = stringUsuari.split(";");
-				usuariA = new Usuari(partsUsuari[0], partsUsuari[1], partsUsuari[2], partsUsuari[5]);
-				usuariA.setIntercanvis(Integer.parseInt(partsUsuari[3]));
-				usuariA.setIntercanvis(Integer.parseInt(partsUsuari[4]));
-				stringUsuari = particio.next();
-				partsUsuari = stringUsuari.split(";");
-				usuariB = new Usuari(partsUsuari[0], partsUsuari[1], partsUsuari[2], partsUsuari[5]);
-				usuariB.setIntercanvis(Integer.parseInt(partsUsuari[3]));
-				usuariB.setIntercanvis(Integer.parseInt(partsUsuari[4]));
-				codiProducteA = particio.next();
-				codiProducteB = particio.next();
-				estat = particio.nextInt();
+				if (type.equalsIgnoreCase("B")) {
+					
+					ID = particio.next();
+					type = particio.next();
+					descripcio = particio.next();
+
+					data = particio.next();
+					dia = Integer.parseInt(data.split("/")[0]);
+					mes = Integer.parseInt(data.split("/")[1]);
+					any = Integer.parseInt(data.split("/")[2]);
+					Data dataInicial = new Data (dia, mes, any);
+					amplada = particio.nextFloat();
+					alçada = particio.nextFloat();
+					fons = particio.nextFloat();
+					pes = particio.nextFloat();
+					data = particio.next();
+					dia = Integer.parseInt(data.split("/")[0]);
+					mes = Integer.parseInt(data.split("/")[1]);
+					any = Integer.parseInt(data.split("/")[2]);
+					Data dataIntercanvi;
+					if(dia == 0 && mes == 0 && any == 0) {
+						dataIntercanvi = new Data(true);
+					}else {
+						dataIntercanvi = new Data (dia, mes, any);
+					}
+					numActiu = particio.nextInt();
+					if (numActiu == 1)
+						actiu = true;
+					else
+						actiu = false;
+					
+					Be B = new Be(ID, type, descripcio, dataInicial, amplada, alçada, fons, pes, dataIntercanvi, actiu);
+					B.esActiu(); //abans d'afegir comprovem si es veritat que encara esta actiu (pot ser que lutim cop de guardar ho estigues i ara ja no)
+					LlistaP.afegirProducte(B);    
+				}									
 				
-				Peticio pet = new Peticio(codi, usuariA, usuariB, codiProducteA, codiProducteB); pet.setEstat(estat);
-				LlistaPet.afegirPet(pet);
+				else if (type.equalsIgnoreCase("S")) {
+					ID = particio.next();
+					type = particio.next();
+					descripcio = particio.next();
+					
+					data = particio.next();
+					dia = Integer.parseInt(data.split("/")[0]);
+					mes = Integer.parseInt(data.split("/")[1]);
+					any = Integer.parseInt(data.split("/")[2]);
+					Data dataInicial = new Data (dia, mes, any);
+					
+					data = particio.next();
+					dia = Integer.parseInt(data.split("/")[0]);
+					mes = Integer.parseInt(data.split("/")[1]);
+					any = Integer.parseInt(data.split("/")[2]);
+					Data dataCaducitat = new Data (dia, mes, any);
+					
+					numIntercanvis = particio.nextInt();
+					numActiu = particio.nextInt();
+					if (numActiu == 1)
+						actiu = true;
+					else
+						actiu = false;
+					Servei S = new Servei(ID, type, descripcio, dataInicial, dataCaducitat, numIntercanvis, actiu);
+					S.esActiu();
+					LlistaP.afegirProducte(S);
+				}
 			}
 			
 			F.close();
+			
 		}
 
 }

@@ -2,6 +2,8 @@ package peticions;
 
 import java.util.Arrays;
 
+import usuari.Usuari;
+
 public class LlistaPeticions {
 
 	private Peticio[] llista;
@@ -78,5 +80,9 @@ public class LlistaPeticions {
 			llista[i].escriureFitxer();
 		}
 	}
+	
+	public Peticio getPeticioiFromLlista(int posicio) {
+        return this.llista[posicio].copia();
+    }
 }
 

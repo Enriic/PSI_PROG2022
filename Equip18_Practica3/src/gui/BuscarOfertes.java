@@ -10,21 +10,29 @@ import javax.swing.table.DefaultTableModel;
 
 import peticions.LlistaPeticions;
 import peticions.Peticio;
+import productes.LlistaProductes;
+import productes.Producte;
 import usuari.LlistaUsuaris;
 
 public class BuscarOfertes {
 	
-	public BuscarOfertes ( LlistaPeticions Lp, LlistaUsuaris Lu) {
-		Peticio pet1 = new Peticio(12345, Lu.getUsuariFromLlista(0), Lu.getUsuariFromLlista(1), "123A", "456B");		//Prueba peticion 1
-		Peticio pet2 = new Peticio(11111, Lu.getUsuariFromLlista(2), Lu.getUsuariFromLlista(3), "789A", "321B");		//Prueba peticion 2
+	public BuscarOfertes (LlistaProductes LlistaP) {
 		
-		LlistaPeticions llistapet = new LlistaPeticions(5);					//creem la llista peticions
-		llistapet.afegirPet(pet1);
-		llistapet.afegirPet(pet2);
-		
-		DefaultTableModel model = new DefaultTableModel(new String[]{"Oferta", "Usuari 1", "Usuari 2"}, 0);
+		/*DefaultTableModel model = new DefaultTableModel(new String[]{"Codi Peticio", "Usuari Demana", "Usuari Rep"}, 0);
+		LlistaPeticions Lpendents = Lp.mostrarPetPendents();
 		for (int i = 0; i < Lp.getNumElem(); i++) {
-		    model.addRow(new Object[]{Lp.mostrarPetPendents()});
+		    model.addRow(new Object[]{Lpendents.getPeticioiFromLlista(i).getCodi()});
+		}*/
+		
+		DefaultTableModel model = new DefaultTableModel(new String[]{"ID Producte", "descripcio", "tipus"}, 0);
+		LlistaProductes Lactius = LlistaP.llistaBensActius();
+		for (int i = 0; i < LlistaP.getNumProductes(); i++) {
+		    Producte producte = LlistaP.getProducteFromLlista(i);
+		    String codi = producte.getID();
+		    String descripcio = producte.getDescripcio();
+		    String tipus = producte.getTipus();
+		    
+		    model.addRow(new Object[]{codi, descripcio, tipus});
 		}
 		// Create the table
 		JTable TablaPeticions = new JTable(model);
