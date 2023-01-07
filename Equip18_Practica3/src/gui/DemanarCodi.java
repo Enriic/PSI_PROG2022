@@ -1,10 +1,5 @@
 package gui;
 
-import java.io.EOFException;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-
 import javax.swing.JOptionPane;
 
 import usuari.*;
@@ -14,7 +9,9 @@ public class DemanarCodi {
 	
 	public DemanarCodi(String t, LlistaUsuaris L) {
 		
-		demanarCodi(L);
+		if(demanarCodi(L)) {
+			new Window("TEST");
+		}
 		
 	}
 	

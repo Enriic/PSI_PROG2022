@@ -87,7 +87,11 @@ public class Peticio {
 			File fitxer = new File("Peticions.txt");
 
 			bw = new BufferedWriter(new FileWriter(fitxer, true));
-			bw.write(this.codi +";"+this.getUsuariA().getNom()+";"+this.getUsuariB().getNom()+";"+this.getCodiProducteA()+";"+this.getCodiProducteB()+";"+this.getEstat()+";\n");
+			bw.write(this.getCodi()+";["+this.getUsuariA().getNom()+";"+this.getUsuariA().getCorreu()+";"+this.getUsuariA().getCodiPostal()+
+					";"+this.getUsuariA().getIntercanvis()+";"+this.getUsuariA().getValoracio()+";"+this.getUsuariA().getCodi()+"];["+
+					this.getUsuariB().getNom()+";"+this.getUsuariB().getCorreu()+";"+this.getUsuariB().getCodiPostal()+";"+
+					this.getUsuariB().getIntercanvis()+";"+this.getUsuariB().getValoracio()+";"+this.getUsuariB().getCodi()+"];"
+					+this.getCodiProducteA()+";"+this.getCodiProducteB()+";"+this.getEstat()+";\n");
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {

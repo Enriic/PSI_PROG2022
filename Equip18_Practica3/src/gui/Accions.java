@@ -13,9 +13,8 @@ public class Accions extends JDialog{
 	  
 	  public Accions(LlistaUsuaris L) {
 		  
-		  if(demanarCodi(L)) {
-			  new Window("TEST");
-		  }
+		  new DemanarCodi("TEST",L);
+		  
 	  }
 	  
 	  public static void main(String[] args) {
@@ -27,35 +26,6 @@ public class Accions extends JDialog{
 	  }
 	  
 	  
-	 	  public static boolean demanarCodi(LlistaUsuaris L) {
-		  boolean trobat= false;
-		  int v = 0;
-		   codi = JOptionPane.showInputDialog("Introdueix codi d'usuari: ");
-		  try {
-				  for (int i = 0 ;  i< L.getNumUsuaris(); i++) {
-				if (L.getUsuariFromLlista(i).getCodi().equals(codi)) {
-					JOptionPane.showMessageDialog(null, "BIEN", "BIEN2", JOptionPane.OK_OPTION);
-					trobat = true;
-				}
-				
-			}
-		  
-		  while (( codi.equals("") ||!trobat)  && (v<5) ) {
-				JOptionPane.showMessageDialog(null, "Cal un codi", "ERROR", JOptionPane.ERROR_MESSAGE);
-				codi = JOptionPane.showInputDialog("Introdueix codi: ");
-				for (int i = 0 ;  i< L.getNumUsuaris(); i++) {
-					if (L.getUsuariFromLlista(i).getCodi().equals(codi)) {
-						JOptionPane.showMessageDialog(null, "BIEN", "BIEN2", JOptionPane.OK_OPTION);
-						trobat = true;
-					}
-				}
-				v++;
-			}
-		  }catch (NullPointerException e) {
-			  System.out.println("cancelado");
-		  }
-		  return trobat;
-	  }
 	  
 
 	  public static void CarregarLlistaFitxer(String nomFitxer, LlistaProductes LlistaP ) throws IOException{

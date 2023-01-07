@@ -288,6 +288,15 @@ public class main {
 		F.close();
 	}
 	
+	public static void SobreescriureFitxerPet(String fitxer, LlistaPeticions L) throws IOException {
+		
+		BufferedWriter bw = new BufferedWriter(new FileWriter(fitxer));
+		bw.write("");
+		bw.close();
+		L.escriureLlistaAlFitxer();
+	}
+	
+	
 	
 	
 	public static void CarregarLlistaProductesFitxer(String nomFitxer, LlistaProductes LlistaP ) throws IOException{
