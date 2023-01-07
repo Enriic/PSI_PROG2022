@@ -1,20 +1,20 @@
 package gui;
 
 import javax.swing.JOptionPane;
-
 import usuari.*;
 
 public class DemanarCodi {
+	private static LlistaUsuaris L;
 	private static String codi;
 	
+	public DemanarCodi() {
+	}
 	public DemanarCodi(String t, LlistaUsuaris L) {
-		
-		if(demanarCodi(L)) {
+		if (demanarCodi(L)){
 			new Window("TEST");
 		}
 		
 	}
-	
 	
 	public  boolean demanarCodi(LlistaUsuaris L) {
 		  boolean trobat= false;
@@ -45,7 +45,5 @@ public class DemanarCodi {
 		  }
 		  return trobat;
 	  }
-	
-	
 	
 }

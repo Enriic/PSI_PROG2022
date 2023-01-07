@@ -11,18 +11,19 @@ public class Accions extends JDialog{
 	private static String codi;
 	
 	  
-	  public Accions(LlistaUsuaris L) {
+	  public Accions(LlistaUsuaris Lu, LlistaPeticions Lp) {
 		  
-		  new DemanarCodi("TEST",L);
+		  new DemanarCodi("TEST",Lu);
 		  
 	  }
 	  
-	  public static void main(String[] args) {
+	  public static void main(String[] args) throws IOException {
 		  
 		  LlistaUsuaris LU1 = new LlistaUsuaris (5);
+		  LlistaPeticions Lp= new LlistaPeticions(5);
 		  CarregarFitxerSer(LU1);
-		  //SobreescriureFitxerSer(LU1);
-		  new Accions(LU1);
+		  CarregarLlistaPeticionsFitxer(Lp);
+		  new Accions(LU1,Lp);
 	  }
 	  
 	  
@@ -172,5 +173,47 @@ public class Accions extends JDialog{
 				System.out.println("Error, el format de l'arxiu no és correcte per la definició actual de la classe usuari."+e);
 			}
 	}
-	  
+
+		public static void CarregarLlistaPeticionsFitxer(LlistaPeticions LlistaPet) throws IOException {
+			int codi;
+			Usuari usuariA; 		// Usuario que HACE la petición
+			Usuari usuariB; 		// Usuario que RECIBE la petición
+			String codiProducteA;
+			String codiProducteB;
+			int estat;
+			
+			String frase;
+			Scanner F = new Scanner (new File("Peticions.txt"));
+			Scanner particio;
+			String stringUsuari;
+			String partsUsuari[];
+			
+			while (F.hasNext()) {
+				frase = F.nextLine();
+				particio = new Scanner(frase);
+				particio.useDelimiter(";");
+				particio.useLocale(Locale.ENGLISH);
+				
+				codi = particio.nextInt();
+				stringUsuari = particio.next();
+				partsUsuari = stringUsuari.split(";");
+				usuariA = new Usuari(partsUsuari[0], partsUsuari[1], partsUsuari[2], partsUsuari[5]);
+				usuariA.setIntercanvis(Integer.parseInt(partsUsuari[3]));
+				usuariA.setIntercanvis(Integer.parseInt(partsUsuari[4]));
+				stringUsuari = particio.next();
+				partsUsuari = stringUsuari.split(";");
+				usuariB = new Usuari(partsUsuari[0], partsUsuari[1], partsUsuari[2], partsUsuari[5]);
+				usuariB.setIntercanvis(Integer.parseInt(partsUsuari[3]));
+				usuariB.setIntercanvis(Integer.parseInt(partsUsuari[4]));
+				codiProducteA = particio.next();
+				codiProducteB = particio.next();
+				estat = particio.nextInt();
+				
+				Peticio pet = new Peticio(codi, usuariA, usuariB, codiProducteA, codiProducteB); pet.setEstat(estat);
+				LlistaPet.afegirPet(pet);
+			}
+			
+			F.close();
+		}
+
 }

@@ -20,7 +20,7 @@ public class Window extends JFrame {
 	private static String codi;
 	
 	public Window(String titul) {
-		super("titul");
+		super(titul);
 		
 		botons.setLayout(new FlowLayout());
 		botons.add(buscarOfertesIntercanvi);
@@ -35,16 +35,20 @@ public class Window extends JFrame {
 		
 		buscarOfertesIntercanvi.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent buscarOfertes) {
-				JFrame newFrame = new JFrame ("TEST");
-				newFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
-				newFrame.setSize(300,300);
-				newFrame.setVisible(true);
+				LlistaPeticions Lp = new LlistaPeticions(1);
+				try {
+					CarregarLlistaPeticionsFitxer(Lp);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				new BuscarOfertes(Lp);
 			}
 			
 		});
 		
 		afegirPeticio.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent afegirPeticio) {
+				setVisible(false);
 				JFrame newFrame = new JFrame ("TEST");
 				newFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
 				newFrame.setSize(300,300);
@@ -55,6 +59,7 @@ public class Window extends JFrame {
 		
 		consultarIntercanvisFets.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent consultarIntercanvis) {
+				setVisible(false);
 				JFrame newFrame = new JFrame ("TEST");
 				newFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
 				newFrame.setSize(300,300);
@@ -68,14 +73,12 @@ public class Window extends JFrame {
 			public void actionPerformed(ActionEvent canviarUsuari) {
 				 LlistaUsuaris LU1 = new LlistaUsuaris (5);
 				  CarregarFitxerSer(LU1);
-				new DemanarCodi("TEST",LU1);
+				  setVisible(false);
+				  new DemanarCodi("TEST",LU1);
 			}
 			
 		});
 		
-		
-		
-			
 		}
 	
 	
@@ -136,4 +139,46 @@ public class Window extends JFrame {
 		}
 }
 		
+	public static void CarregarLlistaPeticionsFitxer(LlistaPeticions LlistaPet) throws IOException {
+		int codi;
+		Usuari usuariA; 		// Usuario que HACE la petición
+		Usuari usuariB; 		// Usuario que RECIBE la petición
+		String codiProducteA;
+		String codiProducteB;
+		int estat;
+		
+		String frase;
+		Scanner F = new Scanner (new File("Peticions.txt"));
+		Scanner particio;
+		String stringUsuari;
+		String partsUsuari[];
+		
+		while (F.hasNext()) {
+			frase = F.nextLine();
+			particio = new Scanner(frase);
+			particio.useDelimiter(";");
+			particio.useLocale(Locale.ENGLISH);
+			
+			codi = particio.nextInt();
+			stringUsuari = particio.next();
+			partsUsuari = stringUsuari.split(";");
+			usuariA = new Usuari(partsUsuari[0], partsUsuari[1], partsUsuari[2], partsUsuari[5]);
+			usuariA.setIntercanvis(Integer.parseInt(partsUsuari[3]));
+			usuariA.setIntercanvis(Integer.parseInt(partsUsuari[4]));
+			stringUsuari = particio.next();
+			partsUsuari = stringUsuari.split(";");
+			usuariB = new Usuari(partsUsuari[0], partsUsuari[1], partsUsuari[2], partsUsuari[5]);
+			usuariB.setIntercanvis(Integer.parseInt(partsUsuari[3]));
+			usuariB.setIntercanvis(Integer.parseInt(partsUsuari[4]));
+			codiProducteA = particio.next();
+			codiProducteB = particio.next();
+			estat = particio.nextInt();
+			
+			Peticio pet = new Peticio(codi, usuariA, usuariB, codiProducteA, codiProducteB); pet.setEstat(estat);
+			LlistaPet.afegirPet(pet);
+		}
+		
+		F.close();
+	}
+
 }
