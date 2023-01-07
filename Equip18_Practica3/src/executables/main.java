@@ -19,8 +19,12 @@ public class main {
 		CarregarFitxerSer(llistausuaris);
 		
 
-		//Peticio pet1 = new Peticio(12345, llistausuaris.getUsuariFromLlista(1), llistausuaris.getUsuariFromLlista(2), "123A", "456B");		//Prueba peticion 1
-		//Peticio pet2 = new Peticio(11111, llistausuaris.getUsuariFromLlista(3), llistausuaris.getUsuariFromLlista(4), "789A", "321B");		//Prueba peticion 2
+		Peticio pet1 = new Peticio(12345, llistausuaris.getUsuariFromLlista(0), llistausuaris.getUsuariFromLlista(1), "123A", "456B");		//Prueba peticion 1
+		Peticio pet2 = new Peticio(11111, llistausuaris.getUsuariFromLlista(2), llistausuaris.getUsuariFromLlista(3), "789A", "321B");		//Prueba peticion 2
+		LlistaPeticions llistapet = new LlistaPeticions(1);					//creem la llista peticions
+		llistapet.afegirPet(pet1);
+		llistapet.afegirPet(pet2);
+		SobreescriureFitxerPet("Peticions.txt",llistapet);
 		llistausuaris.afegirUsuari(user1);
 		llistausuaris.afegirUsuari(user2);
 		llistausuaris.afegirUsuari(user3);

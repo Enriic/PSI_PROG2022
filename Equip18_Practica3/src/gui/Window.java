@@ -68,7 +68,7 @@ public class Window extends JFrame {
 			public void actionPerformed(ActionEvent canviarUsuari) {
 				 LlistaUsuaris LU1 = new LlistaUsuaris (5);
 				  CarregarFitxerSer(LU1);
-				demanarCodi(LU1);
+				new DemanarCodi("TEST",LU1);
 			}
 			
 		});

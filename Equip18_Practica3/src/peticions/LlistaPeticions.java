@@ -1,6 +1,5 @@
 package peticions;
 
-import usuari.Usuari;
 
 public class LlistaPeticions {
 

@@ -10,16 +10,16 @@ import javax.swing.JOptionPane;
 import usuari.*;
 
 public class DemanarCodi {
-	private static LlistaUsuaris L;
 	private static String codi;
 	
-	public DemanarCodi() {
+	public DemanarCodi(String t, LlistaUsuaris L) {
+		
+		demanarCodi(L);
 		
 	}
 	
 	
-	public  boolean demanarCodi() {
-		CarregarFitxerSer(L);
+	public  boolean demanarCodi(LlistaUsuaris L) {
 		  boolean trobat= false;
 		  int v = 0;
 		   codi = JOptionPane.showInputDialog("Introdueix codi d'usuari: ");
@@ -50,29 +50,5 @@ public class DemanarCodi {
 	  }
 	
 	
-	public static void CarregarFitxerSer(LlistaUsuaris X) {
-		ObjectInputStream fit;
-		try {
-			
-			fit = new ObjectInputStream(new FileInputStream("usuaris.ser"));
-			
-			while(true) {
-				L.afegirUsuari((Usuari)fit.readObject());
-				
-			}
-		
-		}
-		catch (EOFException e) {
-			System.out.println("Llegit correctament");
-		}
-		catch (IOException e) {
-			System.out.println("Error leer fitxer");
-		}
-		catch (ClassNotFoundException e) {
-			System.out.println("Error, no es troba la classe usuari."+e);
-		}
-		catch (ClassCastException e){
-			System.out.println("Error, el format de l'arxiu no és correcte per la definició actual de la classe usuari."+e);
-		}
-}
+	
 }
