@@ -224,7 +224,7 @@ public class main {
 
                     case 14:
                         sortir = true;
-                        SobreescriureFitxerProd("Productes.txt",LlistaProd);
+                        SobreescriureFitxer("Productes.txt",LlistaProd);
                         break;
                     case 15:
                     	sortir = true;
@@ -386,16 +386,7 @@ public class main {
 		
 	}
 	
-	public static void SobreescriureFitxerPet(String fitxer, LlistaPeticions L) throws IOException {
-		
-		BufferedWriter bw = new BufferedWriter(new FileWriter(fitxer));
-		bw.write("");
-		bw.close();
-		L.escriureLlistaAlFitxer();
-	}
-	
-	
-	public static void SobreescriureFitxerProd(String fitxer, LlistaProductes L) throws IOException {
+	public static void SobreescriureFitxer(String fitxer, LlistaProductes L) throws IOException {
 		
 		BufferedWriter bw = new BufferedWriter(new FileWriter(fitxer));
 		bw.write("");
