@@ -21,8 +21,12 @@ public class main {
 
 		//Peticio pet1 = new Peticio(12345, llistausuaris.getUsuariFromLlista(0), llistausuaris.getUsuariFromLlista(1), "123A", "456B");		//Prueba peticion 1
 		//Peticio pet2 = new Peticio(11111, llistausuaris.getUsuariFromLlista(2), llistausuaris.getUsuariFromLlista(3), "789A", "321B");		//Prueba peticion 2
+		
 		LlistaPeticions llistapet = new LlistaPeticions(5);					//creem la llista peticions
+		//llistapet.afegirPet(pet1);
+		//llistapet.afegirPet(pet2);
 		CarregarLlistaPeticionsFitxer(llistapet);
+		System.out.println(llistapet.toString());
 		
 		SobreescriureFitxerPet("Peticions.txt",llistapet);
 		llistausuaris.afegirUsuari(user1);
@@ -246,47 +250,64 @@ public class main {
 	}
 	
 	
-	public static void CarregarLlistaPeticionsFitxer( LlistaPeticions LlistaPet) throws IOException {
-		int codi;
-		Usuari usuariA; 		// Usuario que HACE la petición
-		Usuari usuariB; 		// Usuario que RECIBE la petición
-		String codiProducteA;
-		String codiProducteB;
-		int estat;
-		
-		String frase;
-		Scanner F = new Scanner (new File("Peticions.txt"));
-		Scanner particio;
-		String stringUsuari;
-		String partsUsuari[];
-		
-		while (F.hasNext()) {
-			frase = F.nextLine();
-			particio = new Scanner(frase);
-			particio.useDelimiter(";");
-			particio.useLocale(Locale.ENGLISH);
-			
-			codi = particio.nextInt();
-			stringUsuari = particio.next();
-			partsUsuari = stringUsuari.split(";");
-			usuariA = new Usuari(partsUsuari[0], partsUsuari[1], partsUsuari[2], partsUsuari[5]);
-			usuariA.setIntercanvis(Integer.parseInt(partsUsuari[3]));
-			usuariA.setIntercanvis(Integer.parseInt(partsUsuari[4]));
-			stringUsuari = particio.next();
-			partsUsuari = stringUsuari.split(";");
-			usuariB = new Usuari(partsUsuari[0], partsUsuari[1], partsUsuari[2], partsUsuari[5]);
-			usuariB.setIntercanvis(Integer.parseInt(partsUsuari[3]));
-			usuariB.setIntercanvis(Integer.parseInt(partsUsuari[4]));
-			codiProducteA = particio.next();
-			codiProducteB = particio.next();
-			estat = particio.nextInt();
-			
-			Peticio pet = new Peticio(codi, usuariA, usuariB, codiProducteA, codiProducteB); pet.setEstat(estat);
-			LlistaPet.afegirPet(pet);
-		}
-		
-		F.close();
+	public static void CarregarLlistaPeticionsFitxer(LlistaPeticions LlistaPet) throws IOException {
+	    String codi;
+	    Usuari usuariA; 		// Usuario que HACE la petición
+	    Usuari usuariB; 		// Usuario que RECIBE la petición
+	    String codiProducteA;
+	    String codiProducteB;
+	    int estat;
+	    String frase;
+	    Scanner F = new Scanner (new File("Peticions.txt"));
+	    Scanner particio;
+	    String stringUsuari;
+	    String partsUsuari[];
+	    String nomusuari;
+	    String correuusuari;
+	    String codipostal;
+	    String contrasena;
+	    int intercanvis;
+	    int valoracio;
+
+	    while (F.hasNext()) {
+	        frase = F.nextLine();
+	        particio = new Scanner(frase);
+	        particio.useDelimiter(";");
+	        particio.useLocale(Locale.ENGLISH);
+
+	        codi = particio.next();
+	        nomusuari = particio.next();
+	        correuusuari= particio.next();
+	        codipostal= particio.next();
+	        intercanvis = particio.nextInt();
+	        valoracio=particio.nextInt();
+	        contrasena = particio.next();
+	        usuariA = new Usuari(nomusuari, correuusuari, codipostal,contrasena);
+	        
+	        usuariA.setIntercanvis(intercanvis);
+	        
+	        nomusuari = particio.next();
+	        correuusuari= particio.next();
+	        codipostal= particio.next();
+	        intercanvis = particio.nextInt();
+	        valoracio=particio.nextInt();
+	        contrasena = particio.next();
+	        usuariB = new Usuari(nomusuari, correuusuari, codipostal,contrasena);
+	        usuariB.setIntercanvis(intercanvis);
+	        codiProducteA=particio.next();
+	        codiProducteB=particio.next();
+	        
+	        estat = particio.nextInt();
+
+	        Peticio pet = new Peticio(codi, usuariA, usuariB, codiProducteA, codiProducteB);
+	        pet.setEstat(estat);
+	        LlistaPet.afegirPet(pet);
+	        particio.close();
+	    }
+
+	    F.close();
 	}
+
 	
 	public static void SobreescriureFitxerPet(String fitxer, LlistaPeticions L) throws IOException {
 		

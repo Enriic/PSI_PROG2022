@@ -22,7 +22,7 @@ public class Accions extends JDialog{
 		  LlistaUsuaris LU1 = new LlistaUsuaris (5);
 		  LlistaPeticions Lp= new LlistaPeticions(5);
 		  CarregarFitxerSer(LU1);
-		  CarregarLlistaPeticionsFitxer(Lp);
+		  //CarregarLlistaPeticionsFitxer(Lp);
 		  new Accions(LU1,Lp);
 	  }
 	  

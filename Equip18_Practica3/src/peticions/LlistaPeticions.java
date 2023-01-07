@@ -1,5 +1,6 @@
 package peticions;
 
+import java.util.Arrays;
 
 public class LlistaPeticions {
 
@@ -65,6 +66,13 @@ public class LlistaPeticions {
 	}
 
 	
+	
+	@Override
+	public String toString() {
+		return "[llista=" + Arrays.toString(llista) + ", numElem=" + numElem + "]";
+	}
+
+
 	public void escriureLlistaAlFitxer() {
 		for (int i = 0; i < numElem; i++) {
 			llista[i].escriureFitxer();

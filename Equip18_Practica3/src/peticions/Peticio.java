@@ -7,14 +7,14 @@ import java.io.IOException;
 import usuari.*;
 
 public class Peticio {
-	private int codi;
+	private String codi;
 	private Usuari usuariA; 		// Usuario que HACE la petición
 	private Usuari usuariB; 		// Usuario que RECIBE la petición
 	private String codiProducteA;
 	private String codiProducteB;
 	private int estat;
 	
-	public Peticio(int codi, Usuari usuariA, Usuari usuariB, String codiProducteA, String codiProducteB) {
+	public Peticio(String codi, Usuari usuariA, Usuari usuariB, String codiProducteA, String codiProducteB) {
 		this.codi = codi;
 		this.usuariA = usuariA;
 		this.usuariB = usuariB;
@@ -28,7 +28,7 @@ public class Peticio {
 		return estat;
 	}
 
-	public int getCodi() {
+	public String getCodi() {
 		return codi;
 	}
 
@@ -87,10 +87,10 @@ public class Peticio {
 			File fitxer = new File("Peticions.txt");
 
 			bw = new BufferedWriter(new FileWriter(fitxer, true));
-			bw.write(this.getCodi()+";["+this.getUsuariA().getNom()+";"+this.getUsuariA().getCorreu()+";"+this.getUsuariA().getCodiPostal()+
-					";"+this.getUsuariA().getIntercanvis()+";"+this.getUsuariA().getValoracio()+";"+this.getUsuariA().getCodi()+"];["+
+			bw.write(this.getCodi()+";"+this.getUsuariA().getNom()+";"+this.getUsuariA().getCorreu()+";"+this.getUsuariA().getCodiPostal()+
+					";"+this.getUsuariA().getIntercanvis()+";"+this.getUsuariA().getValoracio()+";"+this.getUsuariA().getCodi()+";"+
 					this.getUsuariB().getNom()+";"+this.getUsuariB().getCorreu()+";"+this.getUsuariB().getCodiPostal()+";"+
-					this.getUsuariB().getIntercanvis()+";"+this.getUsuariB().getValoracio()+";"+this.getUsuariB().getCodi()+"];"
+					this.getUsuariB().getIntercanvis()+";"+this.getUsuariB().getValoracio()+";"+this.getUsuariB().getCodi()+";"
 					+this.getCodiProducteA()+";"+this.getCodiProducteB()+";"+this.getEstat()+";\n");
 		} catch (IOException e) {
 			e.printStackTrace();

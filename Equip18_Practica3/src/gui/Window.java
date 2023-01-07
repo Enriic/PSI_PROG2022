@@ -36,12 +36,15 @@ public class Window extends JFrame {
 		buscarOfertesIntercanvi.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent buscarOfertes) {
 				LlistaPeticions Lp = new LlistaPeticions(1);
-				try {
+				LlistaUsuaris Lu = new LlistaUsuaris(5);
+				CarregarFitxerSer(Lu);
+				/*try {
 					CarregarLlistaPeticionsFitxer(Lp);
+					
 				} catch (IOException e) {
 					e.printStackTrace();
-				}
-				new BuscarOfertes(Lp);
+				}*/
+				new BuscarOfertes(Lp,Lu);
 			}
 			
 		});
