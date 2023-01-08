@@ -50,10 +50,16 @@ public class LlistaUsuaris {
 	}
 
 
-	public Usuari cercaUsuari(String email) {
+	public Usuari cercaUsuari(String email) throws usuariInexistent{
+		boolean existeix = false;
+		
     	for (int i = 0; i < numUsuaris; i++) {
-    		if (this.llista[i].getCorreu() == email) return llista[i];
+    		if (this.llista[i].getCorreu() == email) {
+    			existeix = true;
+    			return llista[i];
+    		}	
     	}
+    	throw new usuariInexistent;
     	return null;
     }
     

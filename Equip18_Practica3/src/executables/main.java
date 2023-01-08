@@ -200,35 +200,22 @@ public class main {
 						
 						//break;
 					
-					case 11:
-						//Mostrar peticiones pendientes
-						
-						//LlistaPeticions petPend = Peti.mostrarPetPendents(estat);
-						
-						
-						
+					case 11:						
+						LlistaPet.mostrarPetPendents();
 						break;
+						
 					case 12:
-						//Mostrar peticiones aceptadas
-
-						//LlistaPeticions petAcc = Peti.mostrarPetAcceptades(estat);
-						
-						
-						
+						LlistaPet.mostrarPetAcceptades();
 						break;
 					
 					case 13:
-						//Mostrar peticiones rechazadas
-
-						//LlistaPeticions petRef = Peti.mostrarPetRefusades(estat);
-
-
-
+						LlistaPet.mostrarPetRefusades();
 						break;
 
                     case 14:
                         sortir = true;
                         SobreescriureFitxer("Productes.txt",LlistaProd);
+                        SobreescriureFitxerPet("Peticions.txt",LlistaPet);
                         break;
                     case 15:
                     	sortir = true;
@@ -282,7 +269,7 @@ public class main {
 	        intercanvis = particio.nextInt();
 	        valoracio=particio.nextInt();
 	        contrasena = particio.next();
-	        usuariA = new Usuari(nomusuari, correuusuari, codipostal,contrasena);
+	        usuariA = new Usuari(nomusuari, correuusuari, codipostal, contrasena);
 	        
 	        usuariA.setIntercanvis(intercanvis);
 	        
