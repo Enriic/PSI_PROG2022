@@ -35,7 +35,7 @@ public class LlistaPeticions {
 	
 
 	public void RefusarPetLlista(int codi) {
-		llista[codi].RefusarPet();;
+		llista[codi].RefusarPet();
 
 	}
 	
@@ -82,7 +82,7 @@ public class LlistaPeticions {
 	
 	@Override
 	public String toString() {
-		return "[llista=" + Arrays.toString(llista) + ", numElem=" + numElem + "]";
+		return "[llista=" + Arrays.toString(llista) + " numElem=" + numElem + "]";
 	}
 
 

@@ -75,7 +75,6 @@ public class main {
                 @SuppressWarnings("resource")
 				Scanner teclat = new Scanner(System.in);
                 
-                int estat = 0;
 				switch (opcio) {
                     case 1:
                     	afegirBe(teclat, LlistaProd);                    	
@@ -108,7 +107,7 @@ public class main {
                     	break;
                     	
                     case 8:
-                    	serveiMesInterc();
+                    	serveiMesInterc(LlistaProd);
                     	break;
 
                     case 9:
@@ -432,8 +431,10 @@ public class main {
 	}
 	
 	
-	public static void serveiMesInterc() {
+	public static void serveiMesInterc(LlistaProductes L) {
 		System.out.println("Servei amb mes intercanvis:");
+		Producte P = L.mostrarServeiMesIntercanvis();
+		System.out.println(P.toString());
 	}
 	
 	public static void afegirUsuariM(Scanner teclat, LlistaUsuaris L) {

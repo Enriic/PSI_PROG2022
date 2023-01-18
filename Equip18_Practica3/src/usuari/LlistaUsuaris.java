@@ -52,7 +52,7 @@ public class LlistaUsuaris {
 	public Usuari cercaUsuari(String nom){
     	for (int i = 0; i < numUsuaris; i++) {
     		if (this.llista[i].getNom() == nom) {
-    			return llista[i];
+    			return this.llista[i];
     		}	
     	}
     	
