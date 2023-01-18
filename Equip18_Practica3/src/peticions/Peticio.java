@@ -7,14 +7,14 @@ import java.io.IOException;
 import usuari.*;
 
 public class Peticio {
-	private String codi;
+	private int codi;
 	private Usuari usuariA; 		// Usuario que HACE la petición
 	private Usuari usuariB; 		// Usuario que RECIBE la petición
 	private String codiProducteA;
 	private String codiProducteB;
 	private int estat;
 	
-	public Peticio(String codi, Usuari usuariA, Usuari usuariB, String codiProducteA, String codiProducteB) {
+	public Peticio(int codi, Usuari usuariA, Usuari usuariB, String codiProducteA, String codiProducteB) {
 		this.codi = codi;
 		this.usuariA = usuariA;
 		this.usuariB = usuariB;
@@ -28,7 +28,7 @@ public class Peticio {
 		return estat;
 	}
 
-	public String getCodi() {
+	public int getCodi() {
 		return codi;
 	}
 
@@ -62,15 +62,11 @@ public class Peticio {
 	public void AcceptarPet(int valA, int valB) {
 		setEstat(1);
 		
-		if((0<valA && valA<5) && (0<valB && valB<5)){
-		
-			usuariA.setValoracio(((usuariA.getValoracio()*usuariA.getIntercanvis())+valA)/(usuariA.getIntercanvis()+1));
-			usuariA.afegirIntercanvi();	
+		usuariA.setValoracio(((usuariA.getValoracio()*usuariA.getIntercanvis())+valA)/(usuariA.getIntercanvis()+1));
+		usuariA.afegirIntercanvi();	
 
-			usuariB.setValoracio(((usuariB.getValoracio()*usuariB.getIntercanvis())+valB)/(usuariB.getIntercanvis()+1));
-			usuariB.afegirIntercanvi();
-		}
-		else System.out.println("Valoracion(es) fuera de limite (0-5).");
+		usuariB.setValoracio(((usuariB.getValoracio()*usuariB.getIntercanvis())+valB)/(usuariB.getIntercanvis()+1));
+		usuariB.afegirIntercanvi();
 	}
 	
 	
@@ -104,6 +100,6 @@ public class Peticio {
 	
 
 	public String toString(){
-		return "Codi: " +getCodi()+ " Usuari que demana: "+getUsuariA()+ " Usuari al que se li fa la oferta: "+getUsuariB()+ "Codi del producte A: "+getCodiProducteA()+ "Codi del producte B: " +getCodiProducteB();
+		return "Codi: " +getCodi()+ " || Usuari que demana: "+getUsuariA()+ " || Usuari al que se li fa la oferta: "+getUsuariB()+ " || Codi del producte A: "+getCodiProducteA()+ " || Codi del producte B: " +getCodiProducteB();
 	}
 }

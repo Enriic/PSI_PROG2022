@@ -63,7 +63,7 @@ public class LlistaProductes {
 	public LlistaProductes llistaBensActius() {
 		LlistaProductes aux = new LlistaProductes(1);
 		for (int i = 0 ; i<numProductes ; i++) {
-			if(this.llista[i] instanceof Servei && llista[i].esActiu()) {
+			if(this.llista[i] instanceof Be && llista[i].esActiu()) {
 				aux.afegirProducte(llista[i]);
 			}
 		}

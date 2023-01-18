@@ -1,6 +1,5 @@
 package usuari;
-import java.util.*;
-import java.io.*;
+import java.util.Arrays;
 
 
 public class LlistaUsuaris {
@@ -33,10 +32,10 @@ public class LlistaUsuaris {
         return numUsuaris;
     }
 
-    public LlistaUsuaris mostrarUsuarisLlindar(int llindar) {
-    	LlistaUsuaris L = new LlistaUsuaris(5);
+    public LlistaUsuaris mostrarUsuarisLlindar(int min, int max) {
+    	LlistaUsuaris L = new LlistaUsuaris(1);
         for (int i = 0; i< this.numUsuaris; i++) {
-            if (this.llista[i].getValoracio() >= llindar)
+            if ((this.llista[i].getValoracio() >= min) && (this.llista[i].getValoracio() <= max))
                 L.afegirUsuari(this.llista[i]);
         }
         return L;
@@ -50,16 +49,13 @@ public class LlistaUsuaris {
 	}
 
 
-	public Usuari cercaUsuari(String email) throws usuariInexistent{
-		boolean existeix = false;
-		
+	public Usuari cercaUsuari(String nom){
     	for (int i = 0; i < numUsuaris; i++) {
-    		if (this.llista[i].getCorreu() == email) {
-    			existeix = true;
+    		if (this.llista[i].getNom() == nom) {
     			return llista[i];
     		}	
     	}
-    	throw new usuariInexistent;
+    	
     	return null;
     }
     

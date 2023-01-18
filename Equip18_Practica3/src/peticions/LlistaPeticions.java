@@ -28,6 +28,16 @@ public class LlistaPeticions {
         this.numElem ++;
         }
 	
+	public void AcceptarPetLlista(int codi, int valA, int valB) {
+		llista[codi].AcceptarPet(valA, valA);
+	}
+	
+	
+
+	public void RefusarPetLlista(int codi) {
+		llista[codi].RefusarPet();;
+
+	}
 	
 	public LlistaPeticions mostrarPetPendents() {
 		LlistaPeticions aux = new LlistaPeticions(numElem);
@@ -62,6 +72,7 @@ public class LlistaPeticions {
 		}
 		return aux;
 	}
+	
 	
 	public int getNumElem() {
 		return numElem;
