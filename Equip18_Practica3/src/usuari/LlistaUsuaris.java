@@ -1,6 +1,6 @@
 package usuari;
 import java.util.Arrays;
-
+import error.DadaInexistent;
 
 public class LlistaUsuaris {
     private Usuari [] llista;
@@ -49,14 +49,15 @@ public class LlistaUsuaris {
 	}
 
 
-	public Usuari cercaUsuari(String nom){
-    	for (int i = 0; i < numUsuaris; i++) {
-    		if (this.llista[i].getNom() == nom) {
-    			return this.llista[i];
-    		}	
-    	}
-    	
-    	return null;
+	public Usuari cercaUsuari(String nom) throws DadaInexistent{
+		Usuari u = null;
+		int i = 0;
+		while (u == null && i < numUsuaris) {
+			if (llista[i].getNom().equals(nom)) u = this.llista[i];
+			i++;
+		}
+    	if (u == null) throw new DadaInexistent(nom);
+    	return u;
     }
     
     public LlistaUsuaris carregarFitxer() {				// A MIRAR

@@ -1,8 +1,7 @@
 package productes;
 
 import java.util.*;
-
-import usuari.Usuari;
+import error.DadaInexistent;
 
 
 public class LlistaProductes {
@@ -48,7 +47,7 @@ public class LlistaProductes {
 		return aux;
 	}
 	
-	public void donarDeBaixa(String id) {
+	public boolean donarDeBaixa(String id) throws DadaInexistent{
 		int i = 0;
 		boolean trobat = false;
 		while (i < numProductes && trobat == false) {
@@ -58,6 +57,8 @@ public class LlistaProductes {
     		}
     		i++;
     	}
+		if (!trobat) throw new DadaInexistent(id);
+		return trobat;
 	}
 	
 	public LlistaProductes llistaBensActius() {
@@ -69,6 +70,9 @@ public class LlistaProductes {
 		}
 		return aux;
 	}
+	
+	
+	
 	
 	public void escriureLlistaAlFitxer() {
 		for (int i = 0; i < numProductes; i++) {

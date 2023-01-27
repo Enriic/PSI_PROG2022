@@ -1,6 +1,11 @@
 package executables;
 
 import java.util.*;
+
+import error.DadaDuplicada;
+import error.DadaInexistent;
+
+
 import java.io.*;
 import usuari.*;
 import peticions.*;
@@ -50,21 +55,20 @@ public class main {
             System.out.println("   3. Mostrar tots els productes");
             System.out.println("   4. Mostrar serveis actius");
             System.out.println("   5. Mostrar bens actius");
-            System.out.println("   6. Donar de baixa Be");
-            System.out.println("   7. Donar de baixa Servei");
-            System.out.println("   8. Servei amb mes intercanvis");
+            System.out.println("   6. Donar de baixa producte");
+            System.out.println("   7. Servei amb mes intercanvis");
             System.out.println("USUARIS");
-            System.out.println("   9. Afegir usuari");
-            System.out.println("   10. Mostrar usuaris");
-            System.out.println("   11. Cercar usuaris per valoracio"); 
+            System.out.println("   8. Afegir usuari");
+            System.out.println("   9. Mostrar usuaris");
+            System.out.println("   10. Cercar usuaris per valoracio"); 
             System.out.println("PETICIONS");
-			System.out.println("   12. Afegir Peticio");
-			System.out.println("   13. Gestionar peticio");
-			System.out.println("   14. Mostrar peticions pendents");
-			System.out.println("   15. Mostrar peticions acceptades");
-			System.out.println("   16. Mostrar peticions refusades");
-            System.out.println("\n17. Guardar i sortir");
-            System.out.println("18. Sortir sense guardar");
+			System.out.println("   11. Afegir Peticio");
+			System.out.println("   12. Gestionar peticio");
+			System.out.println("   13. Mostrar peticions pendents");
+			System.out.println("   14. Mostrar peticions acceptades");
+			System.out.println("   15. Mostrar peticions refusades");
+            System.out.println("\n16. Guardar i sortir");
+            System.out.println("17. Sortir sense guardar");
 			
             
             try {
@@ -99,55 +103,51 @@ public class main {
                     	break;
                     	
                     case 6:
-                    	baixaBe(teclat, LlistaProd);
+                    	baixaProducte(teclat, LlistaProd);
                     	break;
                     	
                     case 7:
-                    	baixaServei(teclat, LlistaProd);
-                    	break;
-                    	
-                    case 8:
                     	serveiMesInterc(LlistaProd);
                     	break;
 
-                    case 9:
+                    case 8:
                     	afegirUsuariM(teclat, llistausuaris);
                     	break;
                     	
-                    case 10:
+                    case 9:
                     	System.out.println("\n\n"+llistausuaris.toString());
                     	break;
                     	
-                    case 11:
+                    case 10:
                     	cercaUsuarisVal(teclat, llistausuaris);
                     	break;
                     	
-					case 12:
-						afegirPetM(teclat, llistausuaris, LlistaPet);
+					case 11:
+						afegirPetM(teclat, llistausuaris, LlistaPet, LlistaProd);
 						break;
 					
-					case 13:
+					case 12:
 						gestioPet(teclat, LlistaPet);				
 						break;
 					
-					case 14:						
+					case 13:						
 						System.out.println("\n\n"+LlistaPet.mostrarPetPendents().toString());
 						break;
 						
-					case 15:
+					case 14:
 						System.out.println("\n\n"+LlistaPet.mostrarPetAcceptades().toString());
 						break;
 					
-					case 16:
+					case 15:
 						System.out.println("\n\n"+LlistaPet.mostrarPetRefusades().toString());
 						break;
 
-                    case 17:
+                    case 16:
                         sortir = true;
                         SobreescriureFitxer("Productes.txt",LlistaProd);
                         SobreescriureFitxerPet("Peticions.txt",LlistaPet);
                         break;
-                    case 18:
+                    case 17:
                     	sortir = true;
                     	break;
                     	
@@ -381,66 +381,90 @@ public class main {
 	
 	
 	public static void afegirBe(Scanner teclat, LlistaProductes L) {
-		System.out.println("Escriu els seguents valors:");
-    	System.out.println("ID:");
-    	String id = teclat.next();
-    	System.out.println("Descripcio");
+		
+		System.out.println("AFEGIR BE - Escriu els seguents valors:");
+		String id;
+		boolean idOK = false;
+		do {
+			System.out.print("ID: ");
+	    	id = teclat.next();
+	    	try { idOK = !producteDuplicat(id, L);}
+	    	catch (DadaDuplicada e) { System.out.println(e);}
+		} while (!idOK);
+    	
+    	System.out.print("Descripcio: ");
     	String descripcio = teclat.next();
-    	System.out.println("amplada:");
+    	System.out.print("Amplada: ");
     	int amplada = teclat.nextInt();
-    	System.out.println("altura:");
+    	System.out.print("Altura: ");
     	int altura = teclat.nextInt();
-    	System.out.println("fons:");
+    	System.out.print("Fons: ");
     	int fons = teclat.nextInt();
-    	System.out.println("pes:");
+    	System.out.print("Pes: ");
     	int pes = teclat.nextInt();
     	
     	Be B = new Be(id, "Be", descripcio, amplada, altura, fons, pes);
     	L.afegirProducte(B);
+    	
+    	System.out.println("\nEl be s'ha afegit correctament.\n");
 	}
 	
 	public static void afegirServei(Scanner teclat, LlistaProductes L) {
-		System.out.println("Escriu els seguents valors:");
-    	System.out.println("ID:");
-    	String idServei = teclat.next();
-    	System.out.println("Descripcio");
+		System.out.println("AFEGIR SERVEI - Escriu els seguents valors:");
+		String id;
+		boolean idOK = false;
+		do {
+			System.out.print("ID: ");
+	    	id = teclat.next();
+	    	try { idOK = !producteDuplicat(id, L);}
+	    	catch (DadaDuplicada e) { System.out.println(e);}
+		} while (!idOK);
+    	System.out.print("Descripcio: ");
     	String descripcioServei = teclat.next();
     	System.out.println("DATA DE CADUCITAT");
-    	System.out.println("dia:");
+    	System.out.print("Dia: ");
     	int dia = teclat.nextInt();
-    	System.out.println("mes:");
+    	System.out.print("Mes: ");
     	int mes = teclat.nextInt();
-    	System.out.println("any:");
+    	System.out.print("Any: ");
     	int any = teclat.nextInt();
     	
-    	Servei S = new Servei(idServei, "Servei", descripcioServei, new Data(dia,mes,any));
+    	Servei S = new Servei(id, "Servei", descripcioServei, new Data(dia,mes,any));
     	L.afegirProducte(S);
+    	
+    	System.out.println("\nEl servei s'ha afegit correctament.\n");
 	}
 		
-	public static void baixaBe(Scanner teclat, LlistaProductes L) {
-		System.out.println("Escriu l'ID del be que vols donar de baixa:");
-    	String idB = teclat.next();
-    	L.donarDeBaixa(idB);
+	public static void baixaProducte(Scanner teclat, LlistaProductes L) {
+		String id;
+		boolean idOK = false;
+		do {
+			System.out.print("Escriu l'ID del be que vols donar de baixa: ");
+			id = teclat.next();
+			try { idOK = L.donarDeBaixa(id);}
+			catch (DadaInexistent e) {System.out.println(e);}
+		} while (!idOK);
+    	System.out.println("\nEl producte s'ha donat de baixa.\n");
 	}
 	
-	
-	public static void baixaServei(Scanner teclat, LlistaProductes L) {
-		System.out.println("Escriu l'ID del servei que vols donar de baixa:");
-    	String idS = teclat.next();
-    	L.donarDeBaixa(idS);
-	}
 	
 	
 	public static void serveiMesInterc(LlistaProductes L) {
-		System.out.println("Servei amb mes intercanvis:");
+		System.out.println("SERVEI AMB MES INTERCANVIS:");
 		Producte P = L.mostrarServeiMesIntercanvis();
 		System.out.println(P.toString());
 	}
 	
 	public static void afegirUsuariM(Scanner teclat, LlistaUsuaris L) {
-		System.out.println("Escriu els seguents valors:");
-		System.out.print("Nom/alias: ");
-		String nom = teclat.next();
+		System.out.println("AFEGIR USUARI - Escriu els seguents valors:");
+		String nom;
+		boolean nomOK = false;
+		do {
+			System.out.print("Nom/alias: ");
+	    	nom = teclat.next();
+	    	try { nomOK = !usuariDuplicat(nom, L);}
+	    	catch (DadaDuplicada e) { System.out.println(e);}
+		} while (!nomOK);
 		System.out.print("Correu: ");
 		String correu = teclat.next();
 		System.out.print("Codi postal: ");
@@ -450,6 +474,7 @@ public class main {
 		Usuari u = new Usuari(nom, correu, codiPost, codi);
 		L.afegirUsuari(u);
 		
+		System.out.println("\nEl usuari s'ha afegit correctament.\n");
 	}
 	
 	public static void cercaUsuarisVal(Scanner teclat, LlistaUsuaris L) {
@@ -465,18 +490,35 @@ public class main {
 	}
 	
 	
-	public static void afegirPetM(Scanner teclat, LlistaUsuaris llistausuaris, LlistaPeticions LlistaPet) {
+	public static void afegirPetM(Scanner teclat, LlistaUsuaris llistausuaris, LlistaPeticions LlistaPet, LlistaProductes LlistaProd)  {
 		System.out.println("NOVA PETICIO");
-		System.out.print("Nom usuari creador de peticio:");
-		String nom = teclat.next();
-		Usuari usuariA = llistausuaris.cercaUsuari(nom);
-		System.out.println("Nom usuari a qui es fa peticio: ");
-		nom = teclat.next();
-		Usuari usuariB = llistausuaris.cercaUsuari(nom);
-		System.out.print("Codi producte que s'ofereix: ");
-		String codiA = teclat.next();
-		System.out.print("Codi producte que s'espera rebre: ");
-		String codiB = teclat.next();
+		Usuari usuariA = null;
+		Usuari usuariB = null;
+		String nomA, nomB;
+		do {
+			System.out.print("Nom usuari creador de peticio: ");
+	    	nomA = teclat.next();
+	    	System.out.print("Nom usuari a qui es fa peticio: ");
+			nomB = teclat.next();
+	    	try { 
+	    		usuariA = llistausuaris.cercaUsuari(nomA);
+	    		usuariB = llistausuaris.cercaUsuari(nomB);
+	    		} catch (DadaInexistent e) { System.out.println(e);}
+		} while (usuariA == null || usuariB == null);
+		
+		boolean codiOK = false;
+		String codiA, codiB;
+		do {
+			System.out.print("Codi producte que s'ofereix: ");
+			codiA = teclat.next();
+			System.out.print("Codi producte que s'espera rebre: ");
+			codiB = teclat.next();
+			try {
+				codiOK = existeixProducte(codiA, LlistaProd);
+				if (codiOK) codiOK = existeixProducte(codiB, LlistaProd);
+			} catch (DadaInexistent e) { System.out.println(e);}
+		} while (!codiOK);
+		
 		
 		int codiPet = LlistaPet.getNumElem();
 		Peticio p = new Peticio(codiPet, usuariA, usuariB, codiA, codiB);
@@ -505,6 +547,42 @@ public class main {
 		}
 		else if (op == 2) L.RefusarPetLlista(codi);
 		
+	}
+	
+	
+	
+	private static boolean producteDuplicat(String id, LlistaProductes L) throws DadaDuplicada{
+		boolean dupli = false;
+		int i = 0;
+		while (!dupli && i < L.getNumProductes()) {
+			if (L.getProducteFromLlista(i).getID().equals(id)) dupli = true;
+			i++;
+		}
+		if (dupli) throw new DadaDuplicada(id);
+		return dupli;
+	}
+	
+	private static boolean usuariDuplicat(String nom, LlistaUsuaris L) throws DadaDuplicada{
+		boolean dupli = false;
+		int i = 0;
+		while (!dupli && i < L.getNumUsuaris()) {
+			if (L.getUsuariFromLlista(i).getNom().equalsIgnoreCase(nom)) dupli = true;
+			i++;
+		}
+		if (dupli) throw new DadaDuplicada(nom);
+		return dupli;
+	}
+	
+	
+	private static boolean existeixProducte(String codi, LlistaProductes L) throws DadaInexistent{
+		boolean trobat = false;
+		int i = 0;
+		while (!trobat && i < L.getNumProductes()) {
+			if (L.getProducteFromLlista(i).getID().equals(codi)) trobat = true;
+			i++;
+		}
+		if (!trobat) throw new DadaInexistent(codi);
+		return trobat;
 	}
 	
 }
