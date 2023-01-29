@@ -1,10 +1,12 @@
 package gui;
 
+import usuari.LlistaUsuaris;
+
 public class ConsultarIntercanvis {
-
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+	
+	public ConsultarIntercanvis(LlistaUsuaris Lu) {
+		
+		LlistaUsuaris Lista = null ;
 	}
 
 }

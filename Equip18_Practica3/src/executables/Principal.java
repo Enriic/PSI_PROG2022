@@ -15,32 +15,22 @@ public class Principal {
 
 	public static void main(String[] args) throws IOException, DadaInexistent {
 
-		LlistaUsuaris llistausuaris = new LlistaUsuaris(1);
+		LlistaUsuaris llistausuaris = new LlistaUsuaris(1);		//Creem llista Usuari y llegim desde fitxer
 		CarregarFitxerSer(llistausuaris);
-		LlistaProductes LlistaProd = new LlistaProductes(1); 				//creem la llista productes
+		LlistaProductes LlistaProd = new LlistaProductes(1); 				//creem la llista productes y llegim desde fitxer
 		CarregarLlistaProductesFitxer("Productes.txt", LlistaProd);	
-		LlistaPeticions LlistaPet = new LlistaPeticions(1);					//creem la llista peticions
+		LlistaPeticions LlistaPet = new LlistaPeticions(1);					//creem la llista peticions y llegim desde fitxer
 		CarregarLlistaPeticionsFitxer(LlistaPet);
-
-		Usuari user1= new Usuari("Gerard", "marinperezgeri@gmail.com", "43850","Gerard1234");			//Prueba user 1
-		Usuari user2= new Usuari("Argi", "argiderirurt@gmail.com", "31001","4rg1");				//Prueba user 2
-		Usuari user3= new Usuari("Albert", "alberturv@gmail.com", "54850","4tun");				//Prueba user 3
-		Usuari user4= new Usuari("Ramzi", "ramziurv@gmail.com", "98775","P3scad0R");				//Prueba user 4
 		
-		llistausuaris.afegirUsuari(user1);
-		llistausuaris.afegirUsuari(user2);
-		llistausuaris.afegirUsuari(user3);
-		llistausuaris.afegirUsuari(user4);
-		
-		Scanner sn = new Scanner(System.in);
+		Scanner sn = new Scanner(System.in);			//Scanner del main, per demanar l'opcio
         boolean sortir = false;
         int opcio;
         
-        while (!sortir) {
+        while (!sortir) {			// mentre que l'usuari no demani sortir del programa, li mostrem el menu
         	System.out.println("\n\n ========== MENU PRINCIPAL ==========\n");
         	System.out.println("PRODUCTES");
             System.out.println("   1. Afegir be");
-            System.out.println("   2. Afegir servei");
+            System.out.println("   2. Afegir susuariservei");
             System.out.println("   3. Mostrar tots els productes");
             System.out.println("   4. Mostrar serveis actius");
             System.out.println("   5. Mostrar bens actius");
@@ -48,7 +38,7 @@ public class Principal {
             System.out.println("   7. Servei amb mes intercanvis");
             System.out.println("USUARIS");
             System.out.println("   8. Afegir usuari");
-            System.out.println("   9. Mostrar usuaris");
+            System.out.println("   9. Mostrar ");
             System.out.println("   10. Cercar usuaris per valoracio"); 
             System.out.println("PETICIONS");
 			System.out.println("   11. Afegir Peticio");
@@ -64,92 +54,90 @@ public class Principal {
  
                 System.out.print("\n\nTRIA UNA OPCIO: ");
                 opcio = sn.nextInt();
-                
-                @SuppressWarnings("resource")
-				Scanner teclat = new Scanner(System.in);
+				Scanner teclat = new Scanner(System.in);  //Scanner pels metodes statics
                 
 				switch (opcio) {
                     case 1:
-                    	afegirBe(teclat, LlistaProd);                    	
+                    	afegirBe(teclat, LlistaProd);     // Opcio 1 : afegir be                	
                         break;
                         
                     case 2:
-                    	afegirServei(teclat, LlistaProd);                    	
+                    	afegirServei(teclat, LlistaProd);	//Opcio 2 : Afegir servei                	
                         break;
 
                     case 3:
-                    	System.out.print("\n\n"+LlistaProd.toString());
+                    	System.out.print("\n\n"+LlistaProd.toString());	// Opcio 3 : Mostrar llista de productes
                         break;
                         
                     case 4:
-                    	LlistaProductes LS = LlistaProd.llistaServeisActius();
+                    	LlistaProductes LS = LlistaProd.llistaServeisActius();	//Opcio 4 : Mostrar Llista de serveis actius
                 		System.out.println(LS.toString());
                     	break;
                     	
                     case 5:
-                    	LlistaProductes LB = LlistaProd.llistaBensActius();
+                    	LlistaProductes LB = LlistaProd.llistaBensActius();		//Opcio 5 : Mostrar Llista de bens actius
                 		System.out.println(LB.toString());
                     	break;
                     	
                     case 6:
-                    	baixaProducte(teclat, LlistaProd);
+                    	baixaProducte(teclat, LlistaProd);		//Opcio 6 : donar de baixa un producte
                     	break;
                     	
                     case 7:
-                    	serveiMesInterc(LlistaProd);
+                    	serveiMesInterc(LlistaProd);		//Opcio 7 : Mostrar el servei amb mes intercanvis.
                     	break;
 
                     case 8:
-                    	afegirUsuariM(teclat, llistausuaris);
+                    	afegirUsuariM(teclat, llistausuaris);	//Opcio 8 : Afegir usuari a la llista
                     	break;
                     	
                     case 9:
-                    	System.out.println("\n\n"+llistausuaris.toString());
+                    	System.out.println("\n\n"+llistausuaris.toString()); //Opcio 9: Mostrar els usuaris de la llista
                     	break;
                     	
                     case 10:
-                    	cercaUsuarisVal(teclat, llistausuaris);
+                    	cercaUsuarisVal(teclat, llistausuaris);	//Opcio 10: Mostrar usuaris amb valoracio superior a un llindar 
                     	break;
                     	
 					case 11:
-						afegirPetM(teclat, llistausuaris, LlistaPet, LlistaProd);
+						afegirPetM(teclat, llistausuaris, LlistaPet, LlistaProd);	//Opcio 11: Afegir peticio a la llista de peticions
 						break;
 					
 					case 12:
-						gestioPet(teclat, LlistaPet);				
+						gestioPet(teclat, LlistaPet);	//Opcio 12: Acceptar o refusar o ignorar una peticio			
 						break;
 					
 					case 13:						
-						System.out.println("\n\n"+LlistaPet.mostrarPetPendents().toString());
+						System.out.println("\n\n"+LlistaPet.mostrarPetPendents().toString());	//Opcio 13: Mostarr peticions pendents
 						break;
 						
 					case 14:
-						System.out.println("\n\n"+LlistaPet.mostrarPetAcceptades().toString());
+						System.out.println("\n\n"+LlistaPet.mostrarPetAcceptades().toString());	//Opcio 14: Mostarr peticions acceptades
 						break;
 					
 					case 15:
-						System.out.println("\n\n"+LlistaPet.mostrarPetRefusades().toString());
+						System.out.println("\n\n"+LlistaPet.mostrarPetRefusades().toString());	//Opcio 15: Mostarr peticions refusades
 						break;
 
-                    case 16:
+                    case 16:		//Opcio 16 : sortir guardant els canvis al fitxer
                         sortir = true;
                         SobreescriureFitxer("Productes.txt",LlistaProd);
                         SobreescriureFitxerPet("Peticions.txt",LlistaPet);
                         SobreescriureFitxerSer(llistausuaris);
                         break;
-                    case 17:
+                    case 17:		//Opcio 17 : Sortir sense guardar cap informacio
                     	sortir = true;
                     	break;
                     	
                     default:
-                        System.out.println("Nomes numeros entre 1 i 18");
+                        System.out.println("Nomes numeros entre 1 i 18");	//Missatge que es mostra si es selecciona una opcio incorrecte
                 }
             } catch (InputMismatchException e) {
-                System.out.println("Has d'insertar un numero");
+                System.out.println("Has d'insertar un numero");	//Excepcio que es mostra si s'introdueix un caracter no numeric
                 sn.next();
             }
         }
-        sn.close();
+        sn.close();	//tanquem el scanner al final del programa
 	}
 	
 	
@@ -202,13 +190,13 @@ public class Principal {
 	        
 	        estat = particio.nextInt();
 
-	        Peticio pet = new Peticio(codi, usuariA, usuariB, codiProducteA, codiProducteB);
+	        Peticio pet = new Peticio(codi, usuariA, usuariB, codiProducteA, codiProducteB);// creem una nova peticio
 	        pet.setEstat(estat);
-	        LlistaPet.afegirPet(pet);
+	        LlistaPet.afegirPet(pet);	//afegim la peticio a la llista
 	        particio.close();
 	    }
 
-	    F.close();
+	    F.close(); //tanquem el fitxer que usem per llegie les dades
 	}
 
 	
@@ -216,7 +204,7 @@ public class Principal {
 	public static void SobreescriureFitxerPet(String fitxer, LlistaPeticions L) throws IOException {
 		
 		BufferedWriter bw = new BufferedWriter(new FileWriter(fitxer));
-		bw.write("");
+		bw.write("");// fem aquest salt de linea al final del fitxer per que no generi cap error a l'hora d'escriure un altra vegada en qauest fitxer
 		L.escriureLlistaAlFitxer();
 		bw.close();
 	}
