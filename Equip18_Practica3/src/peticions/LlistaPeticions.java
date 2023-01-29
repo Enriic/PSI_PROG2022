@@ -2,8 +2,6 @@ package peticions;
 
 import java.util.Arrays;
 
-import usuari.Usuari;
-
 public class LlistaPeticions {
 
 	private Peticio[] llista;

@@ -42,8 +42,6 @@ public class LlistaUsuaris {
 
     }
     
-    
-    
 	public String toString() {
 		return Arrays.toString(llista) + ", numUsuaris=" + numUsuaris + "]";
 	}

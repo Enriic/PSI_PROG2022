@@ -1,0 +1,3 @@
+0;Gerard;marinperezgeri@gmail.com;43850;0;0;Gerard1234;Argi;argiderirurt@gmail.com;31001;0;0;4rg1;DEF;NNN;0;
+1;Albert;alberturv@gmail.com;54850;0;0;4tun;Ramzi;ramziurv@gmail.com;98775;0;0;P3scad0R;MMM;DEF;0;
+2;Ramzi;ramziurv@gmail.com;98775;0;0;P3scad0R;Gerard;marinperezgeri@gmail.com;43850;0;0;Gerard1234;DEF;MMM;0;

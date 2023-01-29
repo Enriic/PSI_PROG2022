@@ -11,9 +11,9 @@ import usuari.*;
 import peticions.*;
 import productes.*;
 
-public class main {
+public class Principal {
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, DadaInexistent {
 
 		LlistaUsuaris llistausuaris = new LlistaUsuaris(1);
 		CarregarFitxerSer(llistausuaris);
@@ -21,28 +21,17 @@ public class main {
 		CarregarLlistaProductesFitxer("Productes.txt", LlistaProd);	
 		LlistaPeticions LlistaPet = new LlistaPeticions(1);					//creem la llista peticions
 		CarregarLlistaPeticionsFitxer(LlistaPet);
-		System.out.println(LlistaPet.toString());
-		
-		/*Usuari user1= new Usuari("Gerard", "marinperezgeri@gmail.com", "43850","Gerard1234");			//Prueba user 1
+
+		Usuari user1= new Usuari("Gerard", "marinperezgeri@gmail.com", "43850","Gerard1234");			//Prueba user 1
 		Usuari user2= new Usuari("Argi", "argiderirurt@gmail.com", "31001","4rg1");				//Prueba user 2
 		Usuari user3= new Usuari("Albert", "alberturv@gmail.com", "54850","4tun");				//Prueba user 3
 		Usuari user4= new Usuari("Ramzi", "ramziurv@gmail.com", "98775","P3scad0R");				//Prueba user 4
-
-		Peticio pet1 = new Peticio(12345, llistausuaris.getUsuariFromLlista(0), llistausuaris.getUsuariFromLlista(1), "123A", "456B");		//Prueba peticion 1
-		Peticio pet2 = new Peticio(11111, llistausuaris.getUsuariFromLlista(2), llistausuaris.getUsuariFromLlista(3), "789A", "321B");		//Prueba peticion 2
 		
-		llistapet.afegirPet(pet1);
-		llistapet.afegirPet(pet2);
-				
-		SobreescriureFitxerPet("Peticions.txt",llistapet);
 		llistausuaris.afegirUsuari(user1);
 		llistausuaris.afegirUsuari(user2);
 		llistausuaris.afegirUsuari(user3);
 		llistausuaris.afegirUsuari(user4);
-		SobreescriureFitxerSer(LU2);*/
-
-				
-		@SuppressWarnings("resource")
+		
 		Scanner sn = new Scanner(System.in);
         boolean sortir = false;
         int opcio;
@@ -146,6 +135,7 @@ public class main {
                         sortir = true;
                         SobreescriureFitxer("Productes.txt",LlistaProd);
                         SobreescriureFitxerPet("Peticions.txt",LlistaPet);
+                        SobreescriureFitxerSer(llistausuaris);
                         break;
                     case 17:
                     	sortir = true;
@@ -158,7 +148,8 @@ public class main {
                 System.out.println("Has d'insertar un numero");
                 sn.next();
             }
-        }		
+        }
+        sn.close();
 	}
 	
 	
@@ -173,8 +164,6 @@ public class main {
 	    String frase;
 	    Scanner F = new Scanner (new File("Peticions.txt"));
 	    Scanner particio;
-	    String stringUsuari;
-	    String partsUsuari[];
 	    String nomusuari;
 	    String correuusuari;
 	    String codipostal;
@@ -198,6 +187,7 @@ public class main {
 	        usuariA = new Usuari(nomusuari, correuusuari, codipostal, contrasena);
 	        
 	        usuariA.setIntercanvis(intercanvis);
+	        usuariA.setValoracio(valoracio);
 	        
 	        nomusuari = particio.next();
 	        correuusuari= particio.next();
@@ -227,8 +217,8 @@ public class main {
 		
 		BufferedWriter bw = new BufferedWriter(new FileWriter(fitxer));
 		bw.write("");
-		bw.close();
 		L.escriureLlistaAlFitxer();
+		bw.close();
 	}
 	
 	public static void CarregarLlistaProductesFitxer(String nomFitxer, LlistaProductes LlistaP ) throws IOException{

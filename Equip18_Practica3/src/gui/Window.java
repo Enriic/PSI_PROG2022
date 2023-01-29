@@ -5,19 +5,21 @@ import java.awt.event.*;
 import java.io.*;
 import java.util.*;
 import javax.swing.*;
+
+import error.DadaInexistent;
 import productes.*;
 import peticions.*;
 
-import java.awt.event.*;
-
 
 public class Window extends JFrame {
+	private static final long serialVersionUID = 1L;
 	private JPanel botons = new JPanel();
 	private JButton buscarOfertesIntercanvi= new JButton ("Buscar ofertes d'intercanvi actives");
 	private JButton afegirPeticio = new JButton("Afegir peticio d'intercanvi");
 	private JButton consultarIntercanvisFets = new JButton ("Consultar els intercanvis que ha fet");
 	private JButton canviarUsuari = new JButton ("Canviar l'usuari");
 	private static String codi;
+	private JFrame Dades;
 	
 	public Window(String titul) {
 		super(titul);
@@ -33,17 +35,22 @@ public class Window extends JFrame {
 		setSize(300,300);
 		setVisible(true);
 		
+		LlistaProductes Lproductes = new LlistaProductes(1);
+		LlistaUsuaris Lu = new LlistaUsuaris(1);
+		LlistaPeticions LPet = new LlistaPeticions(1);
+		
+		try {
+			CarregarLlistaFitxer("Productes.txt",Lproductes);
+			CarregarFitxerSer(Lu);
+			CarregarLlistaPeticionsFitxer(LPet);
+			
+		} catch (IOException e) {
+			System.out.println(e);
+		}
+		
+		
 		buscarOfertesIntercanvi.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent buscarOfertes) {
-				LlistaProductes Lproductes = new LlistaProductes(1);
-				LlistaUsuaris Lu = new LlistaUsuaris(5);
-				CarregarFitxerSer(Lu);
-				try {
-					CarregarLlistaFitxer("Productes.txt",Lproductes);
-					
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
 				new BuscarOfertes(Lproductes);
 			}
 			
@@ -51,11 +58,18 @@ public class Window extends JFrame {
 		
 		afegirPeticio.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent afegirPeticio) {
-				setVisible(false);
-				JFrame newFrame = new JFrame ("TEST");
-				newFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
-				newFrame.setSize(300,300);
-				newFrame.setVisible(true);
+				System.out.println(LPet.toString());	//Para mirar cuantos hay al principio
+				
+				AfegirPeticioIntercanvi a = new AfegirPeticioIntercanvi(Dades,LPet,Lu,Lproductes);
+				if (a.dadesEntrades()) {
+					String nom1= a.getNom1();
+					String nom2= a.getNom2();
+					String codi1= a.getCodi1();
+					String codi2= a.getCodi2();
+					afegirPeticio(Lu,Lproductes,LPet, nom1, nom2, codi1,codi2);
+					
+				}
+				System.out.println(LPet.toString()); //Para mirar si se ha añadido correctamente
 			}
 			
 		});
@@ -63,10 +77,6 @@ public class Window extends JFrame {
 		consultarIntercanvisFets.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent consultarIntercanvis) {
 				setVisible(false);
-				JFrame newFrame = new JFrame ("TEST");
-				newFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
-				newFrame.setSize(300,300);
-				newFrame.setVisible(true);
 			}
 			
 		});
@@ -74,10 +84,8 @@ public class Window extends JFrame {
 		
 		canviarUsuari.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent canviarUsuari) {
-				 LlistaUsuaris LU1 = new LlistaUsuaris (5);
-				  CarregarFitxerSer(LU1);
-				  setVisible(false);
-				  new DemanarCodi("TEST",LU1);
+				setVisible(false);
+				new DemanarCodi("Identificacio",Lu);
 			}
 			
 		});
@@ -129,7 +137,6 @@ public class Window extends JFrame {
 		
 		}
 		catch (EOFException e) {
-			System.out.println("Llegit correctament");
 		}
 		catch (IOException e) {
 			System.out.println("Error leer fitxer");
@@ -143,7 +150,7 @@ public class Window extends JFrame {
 }
 		
 	public static void CarregarLlistaPeticionsFitxer(LlistaPeticions LlistaPet) throws IOException {
-	    String codi;
+	    int codi;
 	    Usuari usuariA; 		// Usuario que HACE la petición
 	    Usuari usuariB; 		// Usuario que RECIBE la petición
 	    String codiProducteA;
@@ -152,8 +159,6 @@ public class Window extends JFrame {
 	    String frase;
 	    Scanner F = new Scanner (new File("Peticions.txt"));
 	    Scanner particio;
-	    String stringUsuari;
-	    String partsUsuari[];
 	    String nomusuari;
 	    String correuusuari;
 	    String codipostal;
@@ -167,7 +172,7 @@ public class Window extends JFrame {
 	        particio.useDelimiter(";");
 	        particio.useLocale(Locale.ENGLISH);
 
-	        codi = particio.next();
+	        codi = particio.nextInt();
 	        nomusuari = particio.next();
 	        correuusuari= particio.next();
 	        codipostal= particio.next();
@@ -177,6 +182,7 @@ public class Window extends JFrame {
 	        usuariA = new Usuari(nomusuari, correuusuari, codipostal,contrasena);
 	        
 	        usuariA.setIntercanvis(intercanvis);
+	        usuariA.setValoracio(valoracio);
 	        
 	        nomusuari = particio.next();
 	        correuusuari= particio.next();
@@ -296,4 +302,42 @@ public class Window extends JFrame {
 		
 	}
 
+	  public static void afegirPeticio(LlistaUsuaris LU,LlistaProductes LProd,LlistaPeticions LPet,String nom1,String nom2,String codi1, String codi2) {
+			
+			Usuari U1 = null;
+			Usuari U2 = null;
+			do {
+				try {
+	    		U1 = LU.cercaUsuari(nom1);
+	    		U2 = LU.cercaUsuari(nom2);
+	    		} catch (DadaInexistent e) {System.out.println(e);}
+		} while (U1 == null || U2 == null);
+		
+		boolean codiOK = false;
+		do {
+			try {
+				codiOK = existeixProducte(codi1, LProd);
+				if (codiOK) codiOK = existeixProducte(codi2, LProd);
+			} catch (DadaInexistent e) { System.out.println(e);}
+		} while (!codiOK);
+		
+		
+		int codiPet = LPet.getNumElem();
+		Peticio p = new Peticio(codiPet, U1, U2, codi1, codi2);
+		LPet.afegirPet(p);
+		}
+
+	  private static boolean existeixProducte(String codi, LlistaProductes L) throws DadaInexistent{
+			boolean trobat = false;
+			int i = 0;
+			while (!trobat && i < L.getNumProductes()) {
+				if (L.getProducteFromLlista(i).getID().equals(codi)) trobat = true;
+				i++;
+			}
+			if (!trobat) throw new DadaInexistent(codi);
+			return trobat;
+		}
+
+	
+	
 }
