@@ -14,7 +14,7 @@ public class Accions extends JDialog{
 	  
 	  public static void main(String[] args) throws IOException {
 		  
-		  LlistaUsuaris LU1 = new LlistaUsuaris (5);
+		  LlistaUsuaris LU1 = new LlistaUsuaris (5);			//4tun  : una de les contraseñas.
 		  CarregarFitxerSer(LU1);
 		  new Accions(LU1);
 	  }

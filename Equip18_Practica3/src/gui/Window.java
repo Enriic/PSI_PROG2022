@@ -58,7 +58,6 @@ public class Window extends JFrame {
 		
 		afegirPeticio.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent afegirPeticio) {
-				System.out.println(LPet.toString());	//Para mirar cuantos hay al principio
 				
 				AfegirPeticioIntercanvi a = new AfegirPeticioIntercanvi(Dades,LPet,Lu,Lproductes);
 				if (a.dadesEntrades()) {
@@ -69,7 +68,7 @@ public class Window extends JFrame {
 					afegirPeticio(Lu,Lproductes,LPet, nom1, nom2, codi1,codi2);
 					
 				}
-				System.out.println(LPet.toString()); //Para mirar si se ha añadido correctamente
+				
 			}
 			
 		});
