@@ -130,7 +130,7 @@ public class Principal {
                     	break;
                     	
                     default:
-                        System.out.println("Nomes numeros entre 1 i 18");	//Missatge que es mostra si es selecciona una opcio incorrecte
+                        System.out.println("Nomes numeros entre 1 i 17");	//Missatge que es mostra si es selecciona una opcio incorrecte
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Has d'insertar un numero");	//Excepcio que es mostra si s'introdueix un caracter no numeric
